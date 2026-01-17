@@ -1,211 +1,371 @@
-// src/pages/MapView.jsx - SVG INDIA MAP (NO API NEEDED!)
-import React, { useState, useCallback } from "react";
+// src/pages/NationalDashboard.jsx - FIXED MAP RENDERING v6.2 (STABLE)
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { LoadingCard } from "../components/DashboardComponents";
+import { useNavigate } from "react-router-dom";
 
-export default function MapView({ stationsData, selectedDistrict, onDistrictSelect }) {
-  const [activeDistrict, setActiveDistrict] = useState(null);
+const API = "http://127.0.0.1:8000";
 
-  // ✅ MATCH YOUR DATA DISTRICTS
-  const districtStations = stationsData?.data?.reduce((acc, d) => {
-    const name = d.district.replace(/ \*$/, '').trim();
-    acc[name] = d.estimated_stations_needed || 0;
-    return acc;
-  }, {}) || {};
+const SPACING_6 = '24px';
+const SPACING_8 = '32px';
+const SPACING_12 = '48px';
+const RADIUS_LG = '16px';
+const RADIUS_MD = '12px';
 
-  const getColor = (districtName) => {
-    const stations = districtStations[districtName] || 0;
-    if (stations >= 15) return "#ef4444";
-    if (stations >= 10) return "#f59e0b";
-    if (stations >= 5) return "#10b981";
-    if (stations > 0) return "#3b82f6";
-    return "#e5e7eb";
-  };
+export default function NationalDashboard() {
+  const [nationalData, setNationalData] = useState(null);
+  const [stateData, setStateData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const mapReadyRef = useRef(false);
+  const navigate = useNavigate();
 
-  const handleDistrictClick = (districtName) => {
-    setActiveDistrict(districtName);
-    onDistrictSelect?.(districtName);
-  };
+  useEffect(() => {
+    async function loadNationalData() {
+      try {
+        setLoading(true);
+        const nationalRes = await fetch(`${API}/aggregate/national`);
+        const national = await nationalRes.json();
+        const stateRes = await fetch(`${API}/aggregate/state`);
+        const states = await stateRes.json();
+        setNationalData(national);
+        setStateData(Array.isArray(states) ? states : []);
+      } catch (e) {
+        console.error("Failed to load data:", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadNationalData();
+  }, []);
 
-  return (
-    <div className="page">
-      {/* Header */}
-      <div style={{ marginBottom: "20px" }}>
-        <h2 style={{ marginBottom: "4px" }}>Geographic Distribution</h2>
-        <p style={{ color: "#475569", margin: 0 }}>
-          District-wise Aadhaar station demand across {stationsData?.state || "India"}
-        </p>
-        <p style={{ color: "#94a3b8", fontSize: "12px", marginTop: "6px" }}>
-          Click districts to view station requirements • Jan 2026 data
-        </p>
-      </div>
+  const computeRawServiceLoad = useCallback((state) => {
+    if (!state) return 0;
+    return (
+      1.2 * (state.age_0_5 || 0) +
+      1.1 * (state.age_5_17 || 0) +
+      1.0 * (state.age_18_greater || 0) +
+      0.8 * (state.bio_age_5_17 || 0) +
+      1.0 * (state.bio_age_17_ || 0) +
+      0.6 * (state.demo_age_5_17 || 0) +
+      0.7 * (state.demo_age_17_ || 0)
+    );
+  }, []);
 
-      {/* Interactive SVG Map */}
-      <section className="card section">
-        <div style={{ 
-          display: 'flex', 
-          gap: 20, 
-          alignItems: 'center', 
-          marginBottom: 16 
-        }}>
-          <h3 style={{ margin: 0, fontSize: 18 }}>Uttar Pradesh Station Demand</h3>
-          <div style={{ fontSize: 14, color: '#64748b' }}>
-            {Object.keys(districtStations).length} districts analyzed
-          </div>
-        </div>
+  const stateLoads = stateData.map(computeRawServiceLoad);
+  const maxLoad = Math.max(...stateLoads, 1);
+  
+  const getChoroplethIntensity = useCallback((rawLoad) => {
+    const logValue = Math.log10(Math.max(rawLoad, 1));
+    const normalized = (logValue - Math.log10(1)) / (Math.log10(maxLoad) - Math.log10(1));
+    return Math.max(0.2, Math.min(1.0, normalized));
+  }, [maxLoad]);
 
-        <div style={{ 
-          position: 'relative', 
-          height: '500px', 
-          borderRadius: '12px', 
-          overflow: 'hidden',
-          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-          border: '2px solid #e2e8f0'
-        }}>
-          {/* SVG Uttar Pradesh Map */}
-          <svg 
-            viewBox="0 0 800 1000" 
-            style={{ width: '100%', height: '100%', cursor: 'pointer' }}
-            onMouseLeave={() => setActiveDistrict(null)}
-          >
-            {/* Uttar Pradesh Outline */}
-            <path 
-              d="M100,50 L200,30 L300,80 L350,120 L380,150 L400,140 L420,160 L450,170 L470,190 L500,180 L520,200 L550,220 L580,210 L600,230 L620,250 L650,270 L680,290 L700,310 L720,330 L740,350 L760,370 L780,390 L800,410 L790,430 L770,450 L750,470 L730,490 L710,510 L690,530 L670,550 L650,570 L630,590 L610,610 L590,630 L570,650 L550,670 L530,690 L510,710 L490,730 L470,750 L450,770 L430,790 L410,810 L390,830 L370,850 L350,870 L330,890 L310,910 L290,930 L270,950 L250,970 L230,990 L210,970 L190,950 L170,930 L150,910 L130,890 L110,870 L90,850 L70,830 L50,810 L30,790 L10,770 L5,750 L15,730 L35,710 L55,690 L75,670 L95,650 L115,630 L135,610 L155,590 L175,570 L195,550 L215,530 L235,510 L255,490 L275,470 L295,450 L315,430 L335,410 L355,390 L375,370 L395,350 L415,330 L435,310 L455,290 L475,270 L495,250 L515,230 L535,210 L555,190 L575,170 L595,150 L615,130 L635,110 L655,90 L675,70 L695,50 L715,30 Z" 
-              fill="#f1f5f9" 
-              stroke="#1e293b" 
-              strokeWidth="2"
-            />
+  const getStateColor = useCallback((intensity) => {
+    const r = Math.round(230 + (intensity * (29 - 230)));
+    const g = Math.round(245 + (intensity * (78 - 245)));
+    const b = Math.round(255 + (intensity * (216 - 255)));
+    return `rgb(${r}, ${g}, ${b})`;
+  }, []);
 
-            {/* Key Districts as Clickable Regions */}
-            <g id="districts">
-              {/* Lucknow */}
-              <path 
-                d="M380,180 Q400,160 420,170 440,185 430,205 420,220 400,210 380,200 Z" 
-                fill={getColor("Lucknow")}
-                stroke={activeDistrict === "Lucknow" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Lucknow" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Lucknow")}
-              />
-              
-              {/* Ghaziabad */}
-              <path 
-                d="M480,120 Q500,100 520,110 540,130 530,150 510,140 490,130 Z" 
-                fill={getColor("Ghaziabad")}
-                stroke={activeDistrict === "Ghaziabad" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Ghaziabad" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Ghaziabad")}
-              />
+  // ✅ FIXED MAP INITIALIZATION (PROPER TIMING + SIZE)
+  useEffect(() => {
+    if (loading || !mapRef.current || mapInstanceRef.current || stateData.length === 0) return;
 
-              {/* Kanpur Nagar */}
-              <path 
-                d="M350,250 Q370,230 390,240 410,260 400,280 380,270 360,260 Z" 
-                fill={getColor("Kanpur Nagar")}
-                stroke={activeDistrict === "Kanpur Nagar" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Kanpur Nagar" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Kanpur Nagar")}
-              />
+    let timeoutId;
 
-              {/* Varanasi */}
-              <path 
-                d="M580,380 Q600,360 620,370 640,390 630,410 610,400 590,390 Z" 
-                fill={getColor("Varanasi")}
-                stroke={activeDistrict === "Varanasi" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Varanasi" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Varanasi")}
-              />
+    const initMap = async () => {
+      try {
+        // ✅ CRITICAL: Wait for container to have proper dimensions
+        if (mapRef.current && mapRef.current.clientHeight === 0) {
+          timeoutId = setTimeout(initMap, 100);
+          return;
+        }
 
-              {/* Agra */}
-              <path 
-                d="M450,300 Q470,280 490,290 510,310 500,330 480,320 460,310 Z" 
-                fill={getColor("Agra")}
-                stroke={activeDistrict === "Agra" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Agra" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Agra")}
-              />
+        const L = (await import("leaflet")).default;
+        
+        // ✅ Map container with EXPLICIT dimensions
+        const map = L.map(mapRef.current, {
+          center: [23, 78],
+          zoom: 5,
+          minZoom: 4,
+          maxZoom: 10,
+          zoomControl: true,
+          attributionControl: false,
+          preferCanvas: true
+        });
 
-              {/* Meerut */}
-              <path 
-                d="M520,90 Q540,70 560,80 580,100 570,120 550,110 530,100 Z" 
-                fill={getColor("Meerut")}
-                stroke={activeDistrict === "Meerut" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Meerut" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Meerut")}
-              />
+        // ✅ Clean basemap
+        L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+          {
+            attribution: '© OpenStreetMap © CARTO',
+            subdomains: 'abcd',
+            maxZoom: 19
+          }
+        ).addTo(map);
 
-              {/* Gorakhpur */}
-              <path 
-                d="M650,320 Q670,300 690,310 710,330 700,350 680,340 660,330 Z" 
-                fill={getColor("Gorakhpur")}
-                stroke={activeDistrict === "Gorakhpur" ? "#000" : "#94a3b8"}
-                strokeWidth={activeDistrict === "Gorakhpur" ? "3" : "1.5"}
-                onClick={() => handleDistrictClick("Gorakhpur")}
-              />
+        mapInstanceRef.current = map;
 
-              {/* Add more districts as needed */}
-            </g>
+        // ✅ Add state markers with REAL India coordinates
+        const stateCenters = [
+          [26.85, 80.95],  // UP
+          [19.07, 72.88],  // MH
+          [25.59, 85.13],  // Bihar
+          [22.57, 88.36],  // WB
+          [15.91, 79.74],  // AP
+          [11.12, 78.65],  // TN
+          [23.02, 72.57],  // Gujarat
+          [12.97, 77.59],  // Karnataka
+          [22.27, 78.47],  // MP
+          [27.02, 74.21],  // Rajasthan
+          [28.70, 77.10],  // Delhi
+          [31.10, 77.17],  // HP
+          [20.95, 85.09],  // Odisha
+          [34.08, 77.57]   // J&K
+        ];
 
-            {/* District Labels */}
-            <g fontSize="12" fontWeight="600" fill="#1e2937" textAnchor="middle">
-              <text x="400" y="195" style={{ pointerEvents: 'none' }}>Lucknow</text>
-              <text x="510" y="125" style={{ pointerEvents: 'none' }}>Ghaziabad</text>
-              <text x="385" y="265" style={{ pointerEvents: 'none' }}>Kanpur</text>
-              <text x="610" y="385" style={{ pointerEvents: 'none' }}>Varanasi</text>
-              <text x="475" y="305" style={{ pointerEvents: 'none' }}>Agra</text>
-              <text x="550" y="105" style={{ pointerEvents: 'none' }}>Meerut</text>
-              <text x="685" y="335" style={{ pointerEvents: 'none' }}>Gorakhpur</text>
-            </g>
-          </svg>
+        stateData.slice(0, 14).forEach((state, idx) => {
+          const rawLoad = computeRawServiceLoad(state);
+          const intensity = getChoroplethIntensity(rawLoad);
+          
+          const [lat, lng] = stateCenters[idx] || [23 + idx * 0.5, 78 + idx * 0.3];
+          
+          const circle = L.circleMarker([lat, lng], {
+            radius: 18 + intensity * 22,
+            fillColor: getStateColor(intensity),
+            color: '#ffffff',
+            weight: 3,
+            opacity: 1,
+            fillOpacity: 0.85
+          }).addTo(map);
 
-          {/* Active District Info */}
-          {activeDistrict && (
-            <div style={{
-              position: 'absolute',
-              top: 16,
-              right: 16,
-              background: 'white',
-              padding: '12px 16px',
-              borderRadius: 8,
-              boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
-              border: `2px solid ${getColor(activeDistrict)}`,
-              minWidth: 200
-            }}>
-              <h4 style={{ margin: '0 0 8px 0', fontSize: 15, color: '#1e2937' }}>
-                {activeDistrict}
-              </h4>
-              <div style={{ fontSize: 14, color: '#059669', fontWeight: 600 }}>
-                {districtStations[activeDistrict] || 0} stations needed
+          circle.bindPopup(`
+            <div style="min-width: 240px; font-family: system-ui, sans-serif; padding: 16px">
+              <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #1e293b">${state.state}</h3>
+              <div style="font-size: 32px; font-weight: 800; color: #2563eb; margin-bottom: 12px">
+                ${Math.round(rawLoad).toLocaleString()}
+              </div>
+              <div style="font-size: 14px; color: #64748b; background: #f1f5f9; padding: 8px 12px; border-radius: 8px; font-weight: 500">
+                Raw service demand • Log-normalized visualization
               </div>
             </div>
-          )}
-        </div>
+          `);
 
-        {/* Legend */}
-        <div style={{
-          marginTop: 20,
-          padding: 16,
-          background: '#f8fafc',
-          borderRadius: 8,
-          border: '1px solid #e2e8f0'
+          circle.on({
+            mouseover: (e) => {
+              const layer = e.target;
+              layer.setStyle({ fillOpacity: 1, weight: 5 });
+              layer.bringToFront();
+            },
+            mouseout: (e) => {
+              const layer = e.target;
+              layer.setStyle({ fillOpacity: 0.85, weight: 3 });
+            },
+            click: () => {
+              navigate(`/state/${encodeURIComponent(state.state)}`);
+            }
+          });
+        });
+
+        // ✅ CRITICAL: Fix size + bounds AFTER render
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            if (mapInstanceRef.current) {
+              mapInstanceRef.current.invalidateSize();
+              mapInstanceRef.current.fitBounds([
+                [6.46, 68.10],   // SW India
+                [37.62, 97.50]   // NE India
+              ], { padding: [20, 20] });
+              mapReadyRef.current = true;
+            }
+          }, 350); // ✅ 350ms delay for full layout
+        });
+
+      } catch (error) {
+        console.error("Map init failed:", error);
+      }
+    };
+
+    initMap();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+        mapReadyRef.current = false;
+      }
+    };
+  }, [stateData, loading, navigate, computeRawServiceLoad, getChoroplethIntensity, getStateColor]);
+
+  // ✅ Resize handler
+  useEffect(() => {
+    let resizeTimeout;
+    const handleResize = () => {
+      if (mapInstanceRef.current && mapReadyRef.current) {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          mapInstanceRef.current.invalidateSize();
+        }, 250);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+    };
+  }, []);
+
+  if (loading) return <LoadingCard />;
+
+  return (
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #f8fafc 0%, #f8fcff 100%)',
+      fontFamily: 'system-ui, -apple-system, sans-serif',
+      padding: '32px 0'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 24px'
+      }}>
+        {/* HEADER */}
+        <section style={{
+          background: '#ffffff',
+          borderRadius: RADIUS_LG,
+          border: '1px solid #e2e8f0',
+          padding: SPACING_12,
+          boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06)',
+          marginBottom: SPACING_12,
+          borderTop: '4px solid #1d4ed8'
         }}>
-          <h4 style={{ margin: '0 0 12px 0', fontSize: 14 }}>Station Requirements</h4>
-          <div style={{ display: 'flex', gap: 16, fontSize: 13, flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 20, height: 20, background: '#ef4444', borderRadius: 4 }}></div>
-              <span>15+ stations (High)</span>
+          <h1 style={{
+            fontSize: '28px', fontWeight: 700, color: '#1e293b',
+            margin: '0 0 12px 0', lineHeight: 1.2
+          }}>
+            National Demand Overview
+          </h1>
+          <p style={{
+            fontSize: '18px', color: '#64748b', lineHeight: 1.7,
+            margin: '0 0 24px 0', maxWidth: '600px'
+          }}>
+            Interactive India map showing Aadhaar service demand by state
+          </p>
+          <p style={{
+            fontSize: '15px', color: '#475569',
+            lineHeight: 1.6, margin: 0
+          }}>
+            Click state markers for district analysis. {stateData.length} states loaded.
+          </p>
+        </section>
+
+        {/* MAP CONTAINER - NO OVERFLOW ISSUES */}
+        <section style={{ marginBottom: SPACING_12 }}>
+          <div style={{
+            background: '#ffffff',
+            borderRadius: RADIUS_LG,
+            border: '1px solid #e2e8f0',
+            padding: SPACING_12,
+            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06)',
+            borderTop: '4px solid #2563eb'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center', 
+              marginBottom: SPACING_8 
+            }}>
+              <div>
+                <h2 style={{
+                  fontSize: '20px', fontWeight: 600, color: '#1e293b',
+                  margin: '0 0 8px 0'
+                }}>
+                  Service Demand Heatmap
+                </h2>
+                <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>
+                  Log-normalized state demand (hover markers for details)
+                </p>
+              </div>
+              <div style={{ fontSize: '14px', color: '#475569' }}>
+                Real-time • {stateData.length} states
+              </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 20, height: 20, background: '#f59e0b', borderRadius: 4 }}></div>
-              <span>10-14 stations (Med)</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 20, height: 20, background: '#10b981', borderRadius: 4 }}></div>
-              <span>5-9 stations</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 20, height: 20, background: '#3b82f6', borderRadius: 4 }}></div>
-              <span>1-4 stations</span>
+
+            {/* ✅ PERFECT MAP CONTAINER */}
+            <div 
+              ref={mapRef}
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: '600px',  // ✅ EXPLICIT HEIGHT
+                borderRadius: RADIUS_MD,
+                border: '2px solid #e2e8f0',
+                overflow: 'visible',  // ✅ NO CROPPING
+                background: '#eff6ff',
+                marginBottom: SPACING_8
+              }}
+            />
+
+            {/* LEGEND */}
+            <div style={{
+              display: 'flex',
+              gap: '24px',
+              justifyContent: 'center',
+              padding: '16px',
+              background: '#f1f5f9',
+              borderRadius: RADIUS_MD,
+              border: '1px solid #e2e8f0'
+            }}>
+              {[0.25, 0.5, 0.75, 1.0].map((intensity, idx) => (
+                <div key={idx} style={{ textAlign: 'center', minWidth: '80px' }}>
+                  <div style={{
+                    width: '32px',
+                    height: '24px',
+                    background: getStateColor(intensity),
+                    borderRadius: '6px',
+                    border: '1px solid rgba(0,0,0,0.1)',
+                    margin: '0 auto 8px'
+                  }} />
+                  <span style={{ fontSize: '13px', color: '#475569' }}>
+                    {['Low', 'Medium', 'High', 'Highest'][idx]}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* CTA */}
+        <section style={{
+          background: '#f1f5f9',
+          borderRadius: RADIUS_LG,
+          border: '1px solid #e2e8f0',
+          padding: SPACING_12,
+          boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.08)',
+          textAlign: 'center'
+        }}>
+          <h3 style={{ 
+            fontSize: '18px', 
+            fontWeight: 600, 
+            color: '#1e293b', 
+            margin: '0 0 16px 0' 
+          }}>
+            Ready to Explore?
+          </h3>
+          <p style={{ 
+            fontSize: '16px', 
+            color: '#475569', 
+            lineHeight: 1.7, 
+            maxWidth: '600px', 
+            margin: '0 auto' 
+          }}>
+            Click any state marker above to dive into district-level Aadhaar service metrics.
+          </p>
+        </section>
+      </div>
     </div>
   );
 }

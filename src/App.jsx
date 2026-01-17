@@ -1,4 +1,4 @@
-// App.jsx - FIXED HEADER VISIBILITY
+// App.jsx - FIXED Header Overlap with MAXIMUM Padding
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Map from "./pages/Map";
 import DemandAnalysis from "./pages/DemandAnalysis";
+import DataCleaning from "./pages/data-cleaning/DataCleaning";
 
 export default function App() {
   return (
@@ -24,32 +25,36 @@ export default function App() {
         {/* Main content area */}
         <div style={{
           flex: 1,
-          minWidth: 0,  // ✅ Prevents flex child overflow
+          minWidth: 0,
           display: "flex",
           flexDirection: "column",
-          marginLeft: "260px"  // ✅ Sidebar offset
+          marginLeft: "260px"
         }}>
-          {/* Header - Always visible */}
+          {/* Header - Fixed */}
           <Header style={{ 
             position: "fixed", 
             top: 0, 
             left: "260px", 
             right: 0, 
             zIndex: 100,
-            height: "92px"  // ✅ Fixed height
+            height: "92px"
           }} />
           
-          {/* Scrollable content area */}
+          {/* 🚨 MAXIMUM OVERLAP FIX */}
           <main
             style={{
               flex: 1,
               width: "100%",
               backgroundColor: "#f8fafc",
               color: "#0f172a",
-              marginTop: "92px",  // ✅ Header offset
-              padding: "24px 20px",
+              paddingTop: "120px",        // 🚨 92px header + 28px EXTRA
+              paddingRight: "32px",
+              paddingBottom: "40px",
+              paddingLeft: "32px",
+              margin: 0,                   // 🚨 Remove all margins
               overflow: "auto",
-              boxSizing: "border-box"
+              boxSizing: "border-box",
+              minHeight: "100vh"
             }}
           >
             <Routes>
@@ -57,6 +62,7 @@ export default function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/map" element={<Map />} />
               <Route path="/demand" element={<DemandAnalysis />} />
+              <Route path="/data-cleaning" element={<DataCleaning />} />
             </Routes>
           </main>
         </div>

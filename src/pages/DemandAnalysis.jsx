@@ -1,10 +1,34 @@
-// src/pages/DemandAnalysis.jsx - STATE → DISTRICT DROPDOWN SELECTION
+// src/pages/DemandAnalysis.jsx - PERFECT ALIGNMENT & CONSISTENCY v4.0
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Section, LoadingCard, ErrorCard, KPIGrid } from "../components/DashboardComponents";
 
 const API = "http://127.0.0.1:8000";
 
+// PERFECTLY ALIGNED LAYOUT SYSTEM - SINGLE RESPONSIBLE CONTAINER
+const CONTAINER_STYLE = {
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '0 24px'
+};
+
+// Enterprise Design Tokens - Production Ready
+const designTokens = {
+  spacing: { 4: '16px', 6: '24px', 8: '32px', 12: '48px' },
+  radius: { md: '12px', lg: '16px' },
+  shadows: {
+    sm: '0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+    md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+    lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)'
+  },
+  colors: {
+    slate50: '#f8fafc', slate100: '#f1f5f9', slate200: '#e2e8f0', slate500: '#64748b',
+    slate700: '#334155', slate800: '#1e293b', slate900: '#0f172a',
+    blue500: '#3b82f6', green500: '#10b981', orange500: '#f59e0b'
+  }
+};
+
 export default function DemandAnalysis() {
+  // [ALL EXISTING STATE & LOGIC UNCHANGED - PERFECTLY PRESERVED]
   const [states, setStates] = useState([]);
   const [stationsData, setStationsData] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
@@ -18,7 +42,7 @@ export default function DemandAnalysis() {
   const stateDropdownRef = useRef(null);
   const districtDropdownRef = useRef(null);
 
-  // Load states on mount
+  // [ALL useEffect & handlers unchanged - ZERO FUNCTIONAL CHANGES]
   useEffect(() => {
     async function loadStates() {
       try {
@@ -35,7 +59,6 @@ export default function DemandAnalysis() {
     loadStates();
   }, []);
 
-  // Load stations when state selected
   useEffect(() => {
     async function loadStations() {
       if (!selectedState) {
@@ -43,7 +66,6 @@ export default function DemandAnalysis() {
         setSelectedDistrict(null);
         return;
       }
-
       try {
         setLoading(true);
         setError(null);
@@ -62,7 +84,6 @@ export default function DemandAnalysis() {
     loadStations();
   }, [selectedState]);
 
-  // Click outside handlers
   useEffect(() => {
     function handleClickOutside(event) {
       if (stateDropdownRef.current && !stateDropdownRef.current.contains(event.target)) {
@@ -76,7 +97,6 @@ export default function DemandAnalysis() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ GET SELECTED DISTRICT DATA
   const getSelectedDistrictData = () => {
     if (!selectedDistrict || !stationsData?.data) return null;
     return stationsData.data.find(d => 
@@ -84,7 +104,6 @@ export default function DemandAnalysis() {
     );
   };
 
-  // ✅ ALL DISTRICT OPTIONS
   const districtOptions = stationsData?.data?.map(district => 
     district.district.replace(/ \*$/, '').trim()
   ) || [];
@@ -110,7 +129,7 @@ export default function DemandAnalysis() {
     setStateSearch(name);
     const found = states.find((s) => s.state?.trim() === name);
     setSelectedState(found || null);
-    setSelectedDistrict(null); // Reset district
+    setSelectedDistrict(null);
     setIsStateDropdownOpen(false);
   }, [states]);
 
@@ -121,126 +140,135 @@ export default function DemandAnalysis() {
 
   if (loading) return <LoadingCard />;
 
-  return (
-    <>
-      {/* ✅ STATE + DISTRICT SELECTION */}
-      <Section title="Aadhaar Station Demand Analysis">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 800, width: "100%" }}>
-          
-          {/* STATE DROPDOWN */}
-          <div ref={stateDropdownRef} style={{ position: "relative" }}>
-            <input
-              type="text"
-              value={stateSearch}
-              onChange={(e) => {
-                setStateSearch(e.target.value);
-                setSelectedState(null);
-                setSelectedDistrict(null);
-                setStationsData(null);
-                setError(null);
-                setIsStateDropdownOpen(e.target.value.length > 0);
-              }}
-              onFocus={() => stateSearch && setIsStateDropdownOpen(true)}
-              placeholder="Select state (e.g., Uttar Pradesh)…"
-              style={{
-                width: "100%",
-                padding: "12px 16px",
-                borderRadius: 8,
-                border: selectedState ? "2px solid #10b981" : "2px solid #3b82f6",
-                fontSize: 15,
-                boxSizing: "border-box",
-                background: "#fff",
-                boxShadow: "0 4px 12px rgba(59,130,246,0.15)"
-              }}
-            />
-            {isStateDropdownOpen && filteredStateOptions.length > 0 && (
-              <div style={{
-                position: "absolute",
-                top: "100%",
-                left: 0,
-                right: 0,
-                background: "#fff",
-                border: "2px solid #3b82f6",
-                borderTop: "none",
-                borderRadius: "0 0 8px 8px",
-                maxHeight: 240,
-                overflowY: "auto",
-                zIndex: 1000,
-                boxShadow: "0 20px 40px rgba(59,130,246,0.2)"
-              }}>
-                {filteredStateOptions.map((name) => (
-                  <div
-                    key={name}
-                    onClick={() => handleSelectState(name)}
-                    style={{
-                      padding: "12px 16px",
-                      fontSize: 15,
-                      cursor: "pointer",
-                      background: selectedState?.state?.trim() === name ? "#dbeafe" : "#fff",
-                      borderBottom: "1px solid #f3f4f6",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      transition: "all 0.2s"
-                    }}
-                  >
-                    {name}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+  // PERFECTLY ALIGNED HELPER FUNCTIONS
+  const getInputStyle = (isActive, accentColor) => ({
+    width: '100%',
+    height: '56px',
+    padding: '0 20px',
+    borderRadius: designTokens.radius.lg,
+    border: `2px solid ${isActive ? accentColor : designTokens.colors.slate200}`,
+    background: '#ffffff',
+    fontSize: '16px',
+    fontWeight: 500,
+    color: designTokens.colors.slate900,
+    outline: 'none',
+    boxShadow: isActive ? designTokens.shadows.md : designTokens.shadows.sm,
+    transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)'
+  });
 
-          {/* ✅ DISTRICT DROPDOWN - ONLY AFTER STATE */}
-          {selectedState && stationsData && (
-            <div ref={districtDropdownRef} style={{ position: "relative" }}>
+  const getDropdownStyle = (accentColor) => ({
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    background: '#ffffff',
+    border: `2px solid ${accentColor}`,
+    borderTop: 'none',
+    borderRadius: `0 0 ${designTokens.radius.lg} ${designTokens.radius.lg}`,
+    maxHeight: '320px',
+    overflowY: 'auto',
+    zIndex: 1000,
+    boxShadow: designTokens.shadows.lg
+  });
+
+  // SINGLE PERFECTLY ALIGNED CONTAINER WRAPPER
+  const MainContainer = ({ children }) => (
+    <div style={{
+      minHeight: '100vh',
+      background: `linear-gradient(135deg, ${designTokens.colors.slate50} 0%, #f8fcff 100%)`,
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
+      <div style={CONTAINER_STYLE}>
+        {children}
+      </div>
+    </div>
+  );
+
+  return (
+    <MainContainer>
+      {/* ✅ SINGLE PAGE HEADER - PERFECTLY ALIGNED */}
+      <header style={{
+        padding: `${designTokens.spacing[8]} 0 ${designTokens.spacing[6]}`,
+        borderBottom: `1px solid ${designTokens.colors.slate200}`,
+        marginBottom: designTokens.spacing[6]
+      }}>
+        <h1 style={{
+          fontSize: 'clamp(28px, 5vw, 36px)',
+          fontWeight: 700,
+          color: designTokens.colors.slate900,
+          margin: '0 0 8px 0',
+          lineHeight: 1.1
+        }}>
+          Aadhaar Station Demand Analysis
+        </h1>
+        <p style={{
+          fontSize: '16px',
+          color: designTokens.colors.slate500,
+          margin: 0,
+          fontWeight: 400
+        }}>
+          State and district-level station capacity requirements
+        </p>
+      </header>
+
+      {error && <ErrorCard error={error} />}
+
+      {/* FILTERS - PERFECTLY ALIGNED WITH HEADER */}
+      <section style={{ marginBottom: designTokens.spacing[12] }}>
+        <div style={{
+          background: '#ffffff',
+          borderRadius: designTokens.radius.lg,
+          border: `1px solid ${designTokens.colors.slate200}`,
+          padding: designTokens.spacing[8],
+          boxShadow: designTokens.shadows.md
+        }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '32px',
+            alignItems: 'end'
+          }}>
+            {/* STATE DROPDOWN */}
+            <div style={{ position: 'relative' }} ref={stateDropdownRef}>
               <input
                 type="text"
-                value={selectedDistrict || ""}
-                onChange={(e) => setSelectedDistrict(e.target.value)}
-                onFocus={() => setIsDistrictDropdownOpen(true)}
-                placeholder="Select district (e.g., Lucknow)…"
-                style={{
-                  width: "100%",
-                  padding: "12px 16px",
-                  borderRadius: 8,
-                  border: selectedDistrict ? "2px solid #059669" : "2px solid #6b7280",
-                  fontSize: 15,
-                  boxSizing: "border-box",
-                  background: "#fff",
-                  boxShadow: selectedDistrict ? "0 4px 12px rgba(5,150,105,0.15)" : "0 4px 12px rgba(107,114,128,0.15)"
+                value={stateSearch}
+                onChange={(e) => {
+                  setStateSearch(e.target.value);
+                  setSelectedState(null);
+                  setSelectedDistrict(null);
+                  setStationsData(null);
+                  setError(null);
+                  setIsStateDropdownOpen(e.target.value.length > 0);
+                }}
+                onFocus={() => stateSearch && setIsStateDropdownOpen(true)}
+                placeholder="Select state..."
+                style={getInputStyle(!!selectedState, designTokens.colors.blue500)}
+                onMouseEnter={(e) => {
+                  e.target.style.borderColor = designTokens.colors.blue500;
+                  e.target.style.boxShadow = designTokens.shadows.lg;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.borderColor = selectedState ? designTokens.colors.blue500 : designTokens.colors.slate200;
+                  e.target.style.boxShadow = selectedState ? designTokens.shadows.md : designTokens.shadows.sm;
                 }}
               />
-              {isDistrictDropdownOpen && districtOptions.length > 0 && (
-                <div style={{
-                  position: "absolute",
-                  top: "100%",
-                  left: 0,
-                  right: 0,
-                  background: "#fff",
-                  border: "2px solid #059669",
-                  borderTop: "none",
-                  borderRadius: "0 0 8px 8px",
-                  maxHeight: 240,
-                  overflowY: "auto",
-                  zIndex: 1000,
-                  boxShadow: "0 20px 40px rgba(5,150,105,0.2)"
-                }}>
-                  {districtOptions.map((name) => (
+              {isStateDropdownOpen && filteredStateOptions.length > 0 && (
+                <div style={getDropdownStyle(designTokens.colors.blue500)}>
+                  {filteredStateOptions.map((name) => (
                     <div
                       key={name}
-                      onClick={() => handleSelectDistrict(name)}
+                      onClick={() => handleSelectState(name)}
                       style={{
-                        padding: "12px 16px",
-                        fontSize: 15,
-                        cursor: "pointer",
-                        background: selectedDistrict === name ? "#d1fae5" : "#fff",
-                        borderBottom: "1px solid #f3f4f6",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        transition: "all 0.2s"
+                        padding: '16px 20px',
+                        cursor: 'pointer',
+                        background: selectedState?.state?.trim() === name ? designTokens.colors.slate100 : '#ffffff',
+                        borderBottom: `1px solid ${designTokens.colors.slate200}`,
+                        fontSize: '16px',
+                        transition: 'background-color 150ms ease'
                       }}
+                      onMouseEnter={(e) => e.target.style.background = designTokens.colors.slate100}
+                      onMouseLeave={(e) => e.target.style.background = selectedState?.state?.trim() === name ? designTokens.colors.slate100 : '#ffffff'}
                     >
                       {name}
                     </div>
@@ -248,80 +276,177 @@ export default function DemandAnalysis() {
                 </div>
               )}
             </div>
-          )}
+
+            {/* DISTRICT DROPDOWN */}
+            {selectedState && stationsData && (
+              <div style={{ position: 'relative' }} ref={districtDropdownRef}>
+                <input
+                  type="text"
+                  value={selectedDistrict || ""}
+                  onChange={(e) => setSelectedDistrict(e.target.value)}
+                  onFocus={() => setIsDistrictDropdownOpen(true)}
+                  placeholder="Select district..."
+                  style={getInputStyle(!!selectedDistrict, designTokens.colors.green500)}
+                  onMouseEnter={(e) => {
+                    e.target.style.borderColor = designTokens.colors.green500;
+                    e.target.style.boxShadow = designTokens.shadows.lg;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.borderColor = selectedDistrict ? designTokens.colors.green500 : designTokens.colors.slate200;
+                    e.target.style.boxShadow = selectedDistrict ? designTokens.shadows.md : designTokens.shadows.sm;
+                  }}
+                />
+                {isDistrictDropdownOpen && districtOptions.length > 0 && (
+                  <div style={getDropdownStyle(designTokens.colors.green500)}>
+                    {districtOptions.map((name) => (
+                      <div
+                        key={name}
+                        onClick={() => handleSelectDistrict(name)}
+                        style={{
+                          padding: '16px 20px',
+                          cursor: 'pointer',
+                          background: selectedDistrict === name ? designTokens.colors.slate100 : '#ffffff',
+                          borderBottom: `1px solid ${designTokens.colors.slate200}`,
+                          fontSize: '16px',
+                          transition: 'background-color 150ms ease'
+                        }}
+                        onMouseEnter={(e) => e.target.style.background = designTokens.colors.slate100}
+                        onMouseLeave={(e) => e.target.style.background = selectedDistrict === name ? designTokens.colors.slate100 : '#ffffff'}
+                      >
+                        {name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {error && <ErrorCard error={error} />}
-
-      {/* ✅ SELECTED DISTRICT RESULTS */}
+      {/* ✅ DISTRICT DETAIL - PERFECTLY ALIGNED */}
       {selectedState && selectedDistrict && districtData && (
-        <Section title={`Station Requirements: ${selectedDistrict}`}>
+        <section style={{ marginBottom: designTokens.spacing[12] }}>
           <div style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
-            gap: 20, 
-            marginBottom: 24 
+            marginBottom: designTokens.spacing[8], 
+            paddingBottom: designTokens.spacing[6],
+            borderBottom: `1px solid ${designTokens.colors.slate200}`
           }}>
-            <div style={{
-              padding: "24px",
-              background: "linear-gradient(135deg, #059669 0%, #10b981 100%)",
-              color: "white",
-              borderRadius: "12px",
-              textAlign: "center"
+            <h2 style={{
+              fontSize: 'clamp(24px, 4vw, 28px)',
+              fontWeight: 600,
+              color: designTokens.colors.slate900,
+              margin: 0
             }}>
-              <div style={{ fontSize: 36, fontWeight: 700, marginBottom: 8 }}>
-                {districtData.estimated_stations_needed || 0}
-              </div>
-              <div style={{ fontSize: 14, opacity: 0.9 }}>Stations Needed</div>
-            </div>
-            <div style={{
-              padding: "24px",
-              background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
-              color: "white",
-              borderRadius: "12px",
-              textAlign: "center"
-            }}>
-              <div style={{ fontSize: 24, fontWeight: 700, marginBottom: 8 }}>
-                {Math.round(districtData.service_load_annualised || 0).toLocaleString()}
-              </div>
-              <div style={{ fontSize: 14, opacity: 0.9 }}>Annual Load</div>
-            </div>
-            <div style={{
-              padding: "24px",
-              background: "linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)",
-              color: "white",
-              borderRadius: "12px",
-              textAlign: "center"
-            }}>
-              <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>
-                {districtData.time_window_days} days
-              </div>
-              <div style={{ fontSize: 14, opacity: 0.9 }}>Time Window</div>
-            </div>
+              Station Requirements: {selectedDistrict}
+            </h2>
           </div>
 
+          {/* KPI CARDS - BASELINE ALIGNED */}
           <div style={{
-            background: "#f0fdf4",
-            padding: "20px",
-            borderRadius: "8px",
-            borderLeft: "4px solid #10b981"
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '32px',
+            marginBottom: designTokens.spacing[12]
           }}>
-            <h4 style={{ margin: "0 0 12px 0", color: "#065f46", fontSize: 16 }}>
-              📊 Calculation Details
-            </h4>
-            <div style={{ fontSize: 14, color: "#374151", lineHeight: 1.6 }}>
+            {[ 
+              { value: districtData.estimated_stations_needed || 0, label: 'Stations Needed', color: designTokens.colors.green500 },
+              { value: Math.round(districtData.service_load_annualised || 0).toLocaleString(), label: 'Annual Load', color: designTokens.colors.blue500 },
+              { value: `${districtData.time_window_days} days`, label: 'Time Window', color: designTokens.colors.orange500 }
+            ].map((card, idx) => (
+              <div key={idx} style={{
+                height: '140px',
+                padding: '32px 24px',
+                background: '#ffffff',
+                border: `1px solid ${designTokens.colors.slate200}`,
+                borderRadius: designTokens.radius.lg,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                boxShadow: designTokens.shadows.md,
+                transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = designTokens.shadows.lg;
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = designTokens.shadows.md;
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+              >
+                <div style={{
+                  fontSize: idx === 0 ? 'clamp(28px, 8vw, 36px)' : 'clamp(24px, 6vw, 32px)',
+                  fontWeight: 700,
+                  color: card.color,
+                  marginBottom: '8px',
+                  lineHeight: 1
+                }}>
+                  {card.value}
+                </div>
+                <div style={{
+                  fontSize: '14px',
+                  color: designTokens.colors.slate700,
+                  fontWeight: 500,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  {card.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CALCULATION DETAILS */}
+          <div style={{
+            background: designTokens.colors.slate50,
+            border: `1px solid ${designTokens.colors.slate200}`,
+            borderLeft: `4px solid ${designTokens.colors.green500}`,
+            borderRadius: designTokens.radius.lg,
+            padding: '32px 40px',
+            boxShadow: designTokens.shadows.sm
+          }}>
+            <h3 style={{
+              fontSize: '18px',
+              fontWeight: 600,
+              color: designTokens.colors.slate800,
+              margin: '0 0 16px 0'
+            }}>
+              Calculation Details
+            </h3>
+            <div style={{
+              fontSize: '15px',
+              color: designTokens.colors.slate700,
+              lineHeight: 1.7
+            }}>
               Annualized from {districtData.time_window_days} days data × {districtData.annualisation_factor?.toFixed(2)}x factor<br/>
               1 station = 25,000 weighted service units/year (age-based weights applied)
             </div>
           </div>
-        </Section>
+        </section>
       )}
 
-      {/* ✅ STATE-LEVEL OVERVIEW (when district not selected) */}
+      {/* ✅ STATE OVERVIEW - PERFECTLY ALIGNED */}
       {selectedState && stationsData && !selectedDistrict && (
-        <>
-          <Section title={`Station Requirements - ${selectedState.state}`}>
+        <section style={{ marginBottom: designTokens.spacing[12] }}>
+          <div style={{ 
+            marginBottom: designTokens.spacing[8], 
+            paddingBottom: designTokens.spacing[6],
+            borderBottom: `1px solid ${designTokens.colors.slate200}`
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(24px, 4vw, 28px)',
+              fontWeight: 600,
+              color: designTokens.colors.slate900,
+              margin: 0
+            }}>
+              Station Requirements - {selectedState.state}
+            </h2>
+          </div>
+
+          <div style={{ marginBottom: designTokens.spacing[12] }}>
             <KPIGrid
               items={[
                 ["Total Districts", stationsData.data?.length || 0],
@@ -331,28 +456,87 @@ export default function DemandAnalysis() {
                 ["Highest Demand", Math.max(...sortedDistricts.map(d => d.estimated_stations_needed || 0))]
               ]}
             />
-          </Section>
+          </div>
 
-          <Section title="Top 10 Districts">
-            <div style={{ width: "100%", overflowX: "auto" }}>
-              <table style={{ width: "100%", minWidth: 600, borderCollapse: "collapse", fontSize: 14 }}>
+          <div>
+            <h3 style={{
+              fontSize: '20px',
+              fontWeight: 600,
+              color: designTokens.colors.slate900,
+              margin: '0 0 24px 0'
+            }}>
+              Top 10 Districts
+            </h3>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: designTokens.radius.lg,
+              border: `1px solid ${designTokens.colors.slate200}`,
+              boxShadow: designTokens.shadows.md,
+              overflow: 'hidden'
+            }}>
+              <table style={{ 
+                width: '100%', 
+                borderCollapse: 'collapse',
+                fontSize: '15px'
+              }}>
                 <thead>
-                  <tr style={{ background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)", color: "white" }}>
-                    <th style={{ padding: "16px 20px", textAlign: "left" }}>District</th>
-                    <th style={{ padding: "16px 20px", textAlign: "right" }}>Stations</th>
-                    <th style={{ padding: "16px 20px", textAlign: "right" }}>Load</th>
+                  <tr style={{ background: designTokens.colors.slate50 }}>
+                    <th style={{
+                      padding: '20px 24px',
+                      textAlign: 'left',
+                      fontWeight: 600,
+                      color: designTokens.colors.slate800
+                    }}>
+                      District
+                    </th>
+                    <th style={{
+                      padding: '20px 24px',
+                      textAlign: 'right',
+                      fontWeight: 600,
+                      color: designTokens.colors.slate800
+                    }}>
+                      Stations
+                    </th>
+                    <th style={{
+                      padding: '20px 24px',
+                      textAlign: 'right',
+                      fontWeight: 600,
+                      color: designTokens.colors.slate800
+                    }}>
+                      Load
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {sortedDistricts.slice(0, 10).map((district, idx) => (
-                    <tr key={idx} style={{ background: idx % 2 === 0 ? "#fff" : "#f9fafb" }}>
-                      <td style={{ padding: "16px 20px", fontWeight: 600 }}>
+                    <tr key={idx} style={{
+                      background: idx % 2 === 0 ? '#ffffff' : designTokens.colors.slate50,
+                      transition: 'background-color 150ms ease',
+                      borderBottom: `1px solid ${designTokens.colors.slate200}`
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = designTokens.colors.slate100}
+                    onMouseLeave={(e) => e.currentTarget.style.background = idx % 2 === 0 ? '#ffffff' : designTokens.colors.slate50}
+                    >
+                      <td style={{
+                        padding: '20px 24px',
+                        fontWeight: 500,
+                        color: designTokens.colors.slate900
+                      }}>
                         {district.district.replace(/ \*$/, '')}
                       </td>
-                      <td style={{ padding: "16px 20px", textAlign: "right", color: "#059669", fontWeight: 700 }}>
+                      <td style={{
+                        padding: '20px 24px',
+                        textAlign: 'right',
+                        color: designTokens.colors.green500,
+                        fontWeight: 600
+                      }}>
                         {district.estimated_stations_needed}
                       </td>
-                      <td style={{ padding: "16px 20px", textAlign: "right", color: "#3b82f6" }}>
+                      <td style={{
+                        padding: '20px 24px',
+                        textAlign: 'right',
+                        color: designTokens.colors.blue500
+                      }}>
                         {Math.round(district.service_load_annualised).toLocaleString()}
                       </td>
                     </tr>
@@ -360,21 +544,37 @@ export default function DemandAnalysis() {
                 </tbody>
               </table>
             </div>
-          </Section>
-        </>
+          </div>
+        </section>
       )}
 
-      {/* Empty states */}
+      {/* ✅ EMPTY STATE - NO TITLE DUPLICATION, PERFECTLY ALIGNED */}
       {!selectedState && !loading && (
-        <Section title="Station Demand Analysis">
-          <div style={{ padding: "40px 20px", textAlign: "center" }}>
-            <h3 style={{ color: "#1f2937", marginBottom: 16 }}>📈 AadhaarPulse Station Optimizer</h3>
-            <p style={{ color: "#6b7280", fontSize: 16, maxWidth: "500px", margin: "0 auto" }}>
-              Select state → district to see detailed station requirements.
+        <section style={{
+          textAlign: 'center',
+          padding: `${designTokens.spacing[12]} 0`
+        }}>
+          <div style={{
+            background: '#ffffff',
+            borderRadius: designTokens.radius.lg,
+            border: `1px solid ${designTokens.colors.slate200}`,
+            padding: designTokens.spacing[12],
+            boxShadow: designTokens.shadows.md
+          }}>
+            <p style={{
+              fontSize: '16px',
+              color: designTokens.colors.slate500,
+              lineHeight: 1.7,
+              margin: 0,
+              maxWidth: '500px',
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}>
+              Select a state and district to view detailed station requirements and capacity analysis.
             </p>
           </div>
-        </Section>
+        </section>
       )}
-    </>
+    </MainContainer>
   );
 }

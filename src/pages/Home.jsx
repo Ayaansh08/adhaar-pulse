@@ -5,205 +5,295 @@ export default function Home() {
       style={{
         marginLeft: '260px',  // Sidebar width
         marginTop: '92px',    // Header height
-        padding: '32px 40px 32px 40px',  // Reduced side padding
-        maxWidth: 'calc(100vw - 300px)', // Fits screen width perfectly
-        width: '100%'
+        padding: '40px 40px 64px 40px',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        width: '100%',
+        background: '#fafbfc',
+        minHeight: '100vh',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
       }}
     >
-      <h2 style={{ 
-        margin: '0 0 16px 0', 
-        fontSize: '32px', 
-        fontWeight: '800',
-        color: '#0f172a',
-        letterSpacing: '-0.02em'
-      }}>
-        Welcome to AadhaarPulse
-      </h2>
+      {/* Purpose-Driven Hero */}
+      <div style={{ marginBottom: '56px' }}>
+        <h1 style={{ 
+          margin: '0 0 24px 0', 
+          fontSize: '34px', 
+          fontWeight: '600',
+          color: '#111827',
+          lineHeight: '1.3',
+          letterSpacing: '-0.01em'
+        }}>
+          AadhaarPulse Analytics Platform
+        </h1>
 
-      <p style={{ 
-        color: "#475569", 
-        maxWidth: "600px",  // Slightly narrower for better fit
-        fontSize: '16px',
-        lineHeight: '1.7',
+        <div style={{ 
+          color: "#6b7280", 
+          maxWidth: "680px",
+          fontSize: '16px',
+          lineHeight: '1.65',
+          marginBottom: '8px'
+        }}>
+          Visual analytics for Aadhaar enrolment, biometric verification, 
+          and demographic update demand patterns using UIDAI datasets.
+        </div>
+
+        <div style={{ 
+          color: "#9ca3af", 
+          maxWidth: "680px",
+          fontSize: '15px',
+          lineHeight: '1.6'
+        }}>
+          Supports analysts, planners, and policymakers with state and district-level 
+          service load estimation for resource allocation and policy planning.
+        </div>
+      </div>
+
+      {/* Analytical Navigation Tiles */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "24px",
         marginBottom: '48px'
       }}>
-        AadhaarPulse is a visual analytics dashboard built to explore Aadhaar
-        enrolment, demographic updates, and biometric maintenance patterns using
-        UIDAI-published datasets.
-      </p>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "24px",
-          marginBottom: '48px',
-          maxWidth: '100%'
-        }}
-      >
-        {/* National Overview Card */}
-        <div className="card-hover" style={{
-          padding: '28px',
-          background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-          borderRadius: '16px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-          transition: 'all 0.3s ease',
+        {/* National Overview */}
+        <div style={{
+          padding: '32px',
+          background: '#ffffff',
+          borderRadius: '12px',
+          border: '1px solid #e5e7eb',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
           cursor: 'pointer',
-          position: 'relative',
-          overflow: 'hidden',
-          minHeight: '120px'
-        }}>
+          minHeight: '180px',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'box-shadow 0.2s ease, border-color 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+          e.currentTarget.style.borderColor = '#d1d5db';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+          e.currentTarget.style.borderColor = '#e5e7eb';
+        }}
+        >
           <div style={{
-            position: 'absolute',
-            left: '28px',
-            top: '28px',
-            width: '48px',
-            height: '48px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontSize: '20px',
-            fontWeight: '600'
+            marginBottom: '20px',
+            paddingBottom: '16px',
+            borderBottom: '1px solid #f3f4f6'
           }}>
-            ▣
-          </div>
-          
-          <div style={{ marginLeft: '72px', marginTop: '8px' }}>
-            <h4 style={{
-              margin: '0 0 12px 0',
-              fontSize: '20px',
-              fontWeight: '700',
-              color: '#0f172a'
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: '#3b82f6',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontSize: '16px',
+              fontWeight: '600',
+              marginRight: '16px',
+              flexShrink: 0
+            }}>
+              N
+            </div>
+            <h3 style={{
+              margin: 0,
+              fontSize: '18px',
+              fontWeight: '600',
+              color: '#111827'
             }}>
               National Overview
-            </h4>
+            </h3>
+          </div>
+
+          <div style={{ flex: 1 }}>
             <p style={{ 
-              color: "#64748b", 
+              color: "#374151", 
               fontSize: "15px",
               lineHeight: '1.6',
+              margin: '0 0 12px 0'
+            }}>
+              Aggregated enrolment, biometric, and demographic update metrics 
+              across all states and union territories.
+            </p>
+            <p style={{ 
+              color: "#6b7280", 
+              fontSize: "14px",
+              lineHeight: '1.5',
               margin: 0
             }}>
-              High-level Aadhaar enrolment and update metrics across India.
+              Assess national service demand patterns and capacity utilization trends.
             </p>
           </div>
         </div>
 
-        {/* State-wise Analysis Card */}
-        <div className="card-hover" style={{
-          padding: '28px',
-          background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-          borderRadius: '16px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-          transition: 'all 0.3s ease',
+        {/* State Analysis */}
+        <div style={{
+          padding: '32px',
+          background: '#ffffff',
+          borderRadius: '12px',
+          border: '1px solid #e5e7eb',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
           cursor: 'pointer',
-          position: 'relative',
-          overflow: 'hidden',
-          minHeight: '120px'
-        }}>
+          minHeight: '180px',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'box-shadow 0.2s ease, border-color 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+          e.currentTarget.style.borderColor = '#d1d5db';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+          e.currentTarget.style.borderColor = '#e5e7eb';
+        }}
+        >
           <div style={{
-            position: 'absolute',
-            left: '28px',
-            top: '28px',
-            width: '48px',
-            height: '48px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontSize: '20px',
-            fontWeight: '600'
+            marginBottom: '20px',
+            paddingBottom: '16px',
+            borderBottom: '1px solid #f3f4f6'
           }}>
-            ▥
-          </div>
-          
-          <div style={{ marginLeft: '72px', marginTop: '8px' }}>
-            <h4 style={{
-              margin: '0 0 12px 0',
-              fontSize: '20px',
-              fontWeight: '700',
-              color: '#0f172a'
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: '#10b981',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontSize: '16px',
+              fontWeight: '600',
+              marginRight: '16px',
+              flexShrink: 0
             }}>
-              State-wise Analysis
-            </h4>
+              S
+            </div>
+            <h3 style={{
+              margin: 0,
+              fontSize: '18px',
+              fontWeight: '600',
+              color: '#111827'
+            }}>
+              State Analysis
+            </h3>
+          </div>
+
+          <div style={{ flex: 1 }}>
             <p style={{ 
-              color: "#64748b", 
+              color: "#374151", 
               fontSize: "15px",
               lineHeight: '1.6',
+              margin: '0 0 12px 0'
+            }}>
+              Comparative analysis of Aadhaar service demand across states and districts.
+            </p>
+            <p style={{ 
+              color: "#6b7280", 
+              fontSize: "14px",
+              lineHeight: '1.5',
               margin: 0
             }}>
-              Comparative insights across states and UTs.
+              Identify regional disparities and prioritize resource allocation.
             </p>
           </div>
         </div>
 
-        {/* Geographic View Card */}
-        <div className="card-hover" style={{
-          padding: '28px',
-          background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-          borderRadius: '16px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-          transition: 'all 0.3s ease',
+        {/* Geographic View */}
+        <div style={{
+          padding: '32px',
+          background: '#ffffff',
+          borderRadius: '12px',
+          border: '1px solid #e5e7eb',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
           cursor: 'pointer',
-          position: 'relative',
-          overflow: 'hidden',
-          minHeight: '120px'
-        }}>
+          minHeight: '180px',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'box-shadow 0.2s ease, border-color 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+          e.currentTarget.style.borderColor = '#d1d5db';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+          e.currentTarget.style.borderColor = '#e5e7eb';
+        }}
+        >
           <div style={{
-            position: 'absolute',
-            left: '28px',
-            top: '28px',
-            width: '48px',
-            height: '48px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontSize: '20px',
-            fontWeight: '600'
+            marginBottom: '20px',
+            paddingBottom: '16px',
+            borderBottom: '1px solid #f3f4f6'
           }}>
-            ◈
-          </div>
-          
-          <div style={{ marginLeft: '72px', marginTop: '8px' }}>
-            <h4 style={{
-              margin: '0 0 12px 0',
-              fontSize: '20px',
-              fontWeight: '700',
-              color: '#0f172a'
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: '#f59e0b',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontSize: '16px',
+              fontWeight: '600',
+              marginRight: '16px',
+              flexShrink: 0
+            }}>
+              G
+            </div>
+            <h3 style={{
+              margin: 0,
+              fontSize: '18px',
+              fontWeight: '600',
+              color: '#111827'
             }}>
               Geographic View
-            </h4>
+            </h3>
+          </div>
+
+          <div style={{ flex: 1 }}>
             <p style={{ 
-              color: "#64748b", 
+              color: "#374151", 
               fontSize: "15px",
               lineHeight: '1.6',
+              margin: '0 0 12px 0'
+            }}>
+              Spatial visualization of Aadhaar service demand at district level.
+            </p>
+            <p style={{ 
+              color: "#6b7280", 
+              fontSize: "14px",
+              lineHeight: '1.5',
               margin: 0
             }}>
-              Visual map-based exploration of Aadhaar activity.
+              Map-based insights for location-specific planning and monitoring.
             </p>
           </div>
         </div>
       </div>
 
-      <p
-        style={{
-          fontSize: "13px",
-          color: "#94a3b8",
-          textAlign: 'center',
-          margin: 0
-        }}
-      >
-        Built for the UIDAI Hackathon • UI Prototype
+      {/* Subtle informational footer */}
+      <p style={{
+        fontSize: "12px",
+        color: "#9ca3af",
+        textAlign: 'center',
+        margin: 0,
+        paddingTop: '32px',
+        borderTop: '1px solid #f3f4f6',
+        letterSpacing: '0.025em'
+      }}>
+        Built for UIDAI Hackathon
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-// Sidebar.jsx - PERFECT WITH YOUR CSS
+// Sidebar.jsx - FIXED SINGLE ACTIVE STATE (NO OVERLAP)
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
@@ -8,155 +8,142 @@ export default function Sidebar() {
         width: "260px",
         background: 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)',
         color: "#e2e8f0",
-        padding: "32px 24px",
-        boxShadow: "4px 0 24px rgba(0,0,0,0.4)",
-        borderRight: "1px solid rgba(255,255,255,0.06)",
+        padding: "44px 24px",
+        boxShadow: "3px 0 16px rgba(0,0,0,0.3)",
+        borderRight: "1px solid rgba(255,255,255,0.08)",
         height: "100vh",
         position: "fixed",
         left: 0,
         top: 0,
         zIndex: 99,
-        overflowY: "auto"
+        overflowY: "auto",
+        fontFamily: 'system-ui, -apple-system, sans-serif'
       }}
     >
       {/* Logo */}
-      <div style={{ marginBottom: "48px" }}>
-        <h2 
-          style={{ 
-            margin: "0 0 8px 0", 
-            fontSize: "24px", 
-            fontWeight: "800",
-            background: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}
-        >
+      <div style={{ marginBottom: "64px" }}>
+        <h2 style={{ margin: "0 0 12px 0", fontSize: "26px", fontWeight: "700", color: "#f1f5f9" }}>
           AadhaarPulse
         </h2>
-        <p style={{ 
-          fontSize: "13px", 
-          opacity: 0.7, 
-          margin: 0,
-          fontWeight: "500"
-        }}>
+        <p style={{ fontSize: "13px", color: "#94a3b8", margin: 0, fontWeight: "450", letterSpacing: '0.025em' }}>
           UIDAI Analytics Dashboard
         </p>
       </div>
 
-      {/* Navigation - Uses YOUR CSS classes */}
+      {/* SINGLE SOURCE OF TRUTH - NavLink isActive ONLY */}
       <nav style={{ marginTop: "8px" }}>
         <NavLink 
           to="/" 
-          end 
-          className={({ isActive }) => 
-            `sidebar-link ${isActive ? 'sidebar-link-active' : ''}`
-          }
-          style={{ 
-            display: 'block', 
+          end
+          style={({ isActive }) => ({
+            display: 'block',
+            padding: '16px 20px',
             marginBottom: '4px',
-            textDecoration: 'none'  // ✅ Prevents underline
+            textDecoration: 'none',
+            borderRadius: '8px',
+            color: isActive ? '#f8fafc' : '#e2e8f0',
+            background: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+            borderLeft: isActive ? '4px solid #3b82f6' : 'none',
+            paddingLeft: isActive ? '16px' : '20px', // ✅ Compensate for border
+            fontSize: '15px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease',
+            lineHeight: '1.4'
+          })}
+          onMouseEnter={({ isActive }) => !isActive && {
+            background: 'rgba(59, 130, 246, 0.08)',
+            color: '#e2e8f0'
+          }}
+          onMouseLeave={({ isActive }) => !isActive && {
+            background: 'transparent',
+            color: '#e2e8f0'
           }}
         >
-          {({ isActive }) => (
-            <>
-              <span style={{ 
-                marginRight: '16px', 
-                width: '20px', 
-                display: 'inline-block', 
-                textAlign: 'center', 
-                fontSize: '16px',
-                color: isActive ? '#60a5fa' : '#ffffff'
-              }}>
-                ▣
-              </span>
-              Home
-            </>
-          )}
+          Home
         </NavLink>
 
         <NavLink 
-          to="/dashboard" 
-          className={({ isActive }) => 
-            `sidebar-link ${isActive ? 'sidebar-link-active' : ''}`
-          }
-          style={{ 
-            display: 'block', 
+          to="/dashboard"
+          style={({ isActive }) => ({
+            display: 'block',
+            padding: '16px 20px',
             marginBottom: '4px',
-            textDecoration: 'none'
-          }}
+            textDecoration: 'none',
+            borderRadius: '8px',
+            color: isActive ? '#f8fafc' : '#e2e8f0',
+            background: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+            borderLeft: isActive ? '4px solid #3b82f6' : 'none',
+            paddingLeft: isActive ? '16px' : '20px',
+            fontSize: '15px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease',
+            lineHeight: '1.4'
+          })}
         >
-          {({ isActive }) => (
-            <>
-              <span style={{ 
-                marginRight: '16px', 
-                width: '20px', 
-                display: 'inline-block', 
-                textAlign: 'center', 
-                fontSize: '16px',
-                color: isActive ? '#60a5fa' : '#ffffff'
-              }}>
-                ▥
-              </span>
-              Dashboard
-            </>
-          )}
+          Dashboard
         </NavLink>
 
         <NavLink 
-          to="/map" 
-          className={({ isActive }) => 
-            `sidebar-link ${isActive ? 'sidebar-link-active' : ''}`
-          }
-          style={{ 
-            display: 'block', 
+          to="/map"
+          style={({ isActive }) => ({
+            display: 'block',
+            padding: '16px 20px',
             marginBottom: '4px',
-            textDecoration: 'none'
-          }}
+            textDecoration: 'none',
+            borderRadius: '8px',
+            color: isActive ? '#f8fafc' : '#e2e8f0',
+            background: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+            borderLeft: isActive ? '4px solid #3b82f6' : 'none',
+            paddingLeft: isActive ? '16px' : '20px',
+            fontSize: '15px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease',
+            lineHeight: '1.4'
+          })}
         >
-          {({ isActive }) => (
-            <>
-              <span style={{ 
-                marginRight: '16px', 
-                width: '20px', 
-                display: 'inline-block', 
-                textAlign: 'center', 
-                fontSize: '16px',
-                color: isActive ? '#60a5fa' : '#ffffff'
-              }}>
-                ◈
-              </span>
-              Map View
-            </>
-          )}
+          Map View
         </NavLink>
 
         <NavLink 
-          to="/demand" 
-          className={({ isActive }) => 
-            `sidebar-link ${isActive ? 'sidebar-link-active' : ''}`
-          }
-          style={{ 
-            display: 'block', 
+          to="/demand"
+          style={({ isActive }) => ({
+            display: 'block',
+            padding: '16px 20px',
             marginBottom: '4px',
-            textDecoration: 'none'
-          }}
+            textDecoration: 'none',
+            borderRadius: '8px',
+            color: isActive ? '#f8fafc' : '#e2e8f0',
+            background: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+            borderLeft: isActive ? '4px solid #3b82f6' : 'none',
+            paddingLeft: isActive ? '16px' : '20px',
+            fontSize: '15px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease',
+            lineHeight: '1.4'
+          })}
         >
-          {({ isActive }) => (
-            <>
-              <span style={{ 
-                marginRight: '16px', 
-                width: '20px', 
-                display: 'inline-block', 
-                textAlign: 'center', 
-                fontSize: '16px',
-                color: isActive ? '#60a5fa' : '#10b981'
-              }}>
-                ⚡
-              </span>
-              Demand Analysis
-            </>
-          )}
+          Demand Analysis
+        </NavLink>
+
+        <NavLink 
+          to="/data-cleaning"
+          style={({ isActive }) => ({
+            display: 'block',
+            padding: '16px 20px',
+            marginBottom: '4px',
+            textDecoration: 'none',
+            borderRadius: '8px',
+            color: isActive ? '#f8fafc' : '#e2e8f0',
+            background: isActive ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+            borderLeft: isActive ? '4px solid #3b82f6' : 'none',
+            paddingLeft: isActive ? '16px' : '20px',
+            fontSize: '15px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease',
+            lineHeight: '1.4'
+          })}
+        >
+          Data Cleaning
         </NavLink>
       </nav>
     </aside>
