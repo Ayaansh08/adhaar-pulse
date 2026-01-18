@@ -1,44 +1,76 @@
-export default function Header() {
+// Header.jsx
+import { useEffect, useState } from "react";
+
+export default function Header({ sidebarWidth = 260 }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header
       style={{
-        background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-        padding: '24px 32px',
-        color: '#0f172a',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-        marginLeft: '260px',
-        position: 'fixed',
+        position: "fixed",
         top: 0,
-        left: 0,
+        left: `${sidebarWidth}px`,
         right: 0,
-        zIndex: 100
+        height: "88px",
+        display: "flex",
+        alignItems: "center",
+        padding: "16px 32px",
+        background: scrolled
+          ? "rgba(255,255,255,0.85)"
+          : "#ffffff",
+        backdropFilter: scrolled ? "blur(8px)" : "none",
+        boxShadow: scrolled
+          ? "0 2px 8px rgba(0,0,0,0.06)"
+          : "none",
+        borderBottom: "1px solid #e5e7eb",
+        transition: "all 0.25s ease",
+        zIndex: 200,
+        boxSizing: "border-box",
       }}
     >
-      <div>
-        <h1
+      {/* LEFT CONTEXT (NO ICON, NO DUPLICATE BRANDING) */}
+      <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+        {/* Accent bar */}
+        <div
           style={{
-            margin: '0 0 8px 0',
-            fontSize: '28px',
-            fontWeight: '800',
-            letterSpacing: '-0.02em',
-            color: '#0f172a',
-            lineHeight: '1.2'
+            width: "3px",
+            height: "26px",
+            background: "#3b82f6",
+            borderRadius: "2px",
           }}
-        >
-          AadhaarPulse Dashboard
-        </h1>
-        <p
-          style={{
-            margin: 0,
-            fontSize: '14px',
-            opacity: 0.8,
-            fontWeight: '500',
-            color: '#475569'
-          }}
-        >
-          <span style={{ marginRight: '10px' }}>▸</span>
-          UIDAI Aadhaar Enrolment & Biometric Analytics
-        </p>
+        />
+
+        {/* Contextual Title */}
+        <div>
+          <div
+            style={{
+              fontSize: "22px",
+              fontWeight: 600,
+              color: "#0f172a",
+              lineHeight: 1.2,
+            }}
+          >
+            AadhaarPulse
+          </div>
+          <div
+            style={{
+              fontSize: "14px",
+              color: "#6b7280",
+              fontWeight: 500,
+              marginTop: "2px",
+            }}
+          >
+            UIDAI Analytics Platform
+          </div>
+        </div>
       </div>
     </header>
   );

@@ -1,6 +1,6 @@
 import math
 import pandas as pd
-from app.services.data_loader import load_csv_folder
+from app.services.data_loader import load_clean_csv
 from app.services.time_utils import get_time_span_days
 from app.services.station_estimator import (
     calculate_service_load,
@@ -13,9 +13,9 @@ from app.services.station_estimator import (
 # ------------------------
 
 def aggregate_national():
-    enrol = load_csv_folder("enrolment")
-    bio = load_csv_folder("biometric_update")
-    demo = load_csv_folder("demographic_update")
+    enrol = load_clean_csv("enrolment")
+    bio = load_clean_csv("biometric_update")
+    demo = load_clean_csv("demographic_update")
 
     return {
         "enrolment": {
@@ -35,9 +35,9 @@ def aggregate_national():
 
 
 def aggregate_state():
-    enrol = load_csv_folder("enrolment")
-    bio = load_csv_folder("biometric_update")
-    demo = load_csv_folder("demographic_update")
+    enrol = load_clean_csv("enrolment")
+    bio = load_clean_csv("biometric_update")
+    demo = load_clean_csv("demographic_update")
 
     enrol_g = enrol.groupby("state").sum(numeric_only=True).reset_index()
     bio_g = bio.groupby("state").sum(numeric_only=True).reset_index()
@@ -54,9 +54,9 @@ def aggregate_state():
 
 
 def aggregate_district(state_name: str):
-    enrol = load_csv_folder("enrolment")
-    bio = load_csv_folder("biometric_update")
-    demo = load_csv_folder("demographic_update")
+    enrol = load_clean_csv("enrolment")
+    bio = load_clean_csv("biometric_update")
+    demo = load_clean_csv("demographic_update")
 
     enrol = enrol[enrol["state"] == state_name].drop(columns=["pincode"])
     bio = bio[bio["state"] == state_name].drop(columns=["pincode"])
@@ -90,10 +90,11 @@ def get_common_time_span_days(enrol, bio, demo) -> int:
 # ------------------------
 # DISTRICT + STATION ESTIMATE (ANNUALISED)
 # ------------------------
+
 def aggregate_district_with_station_estimate(state_name: str):
-    enrol = load_csv_folder("enrolment")
-    bio = load_csv_folder("biometric_update")
-    demo = load_csv_folder("demographic_update")
+    enrol = load_clean_csv("enrolment")
+    bio = load_clean_csv("biometric_update")
+    demo = load_clean_csv("demographic_update")
 
     enrol = enrol[enrol["state"] == state_name]
     bio = bio[bio["state"] == state_name]
@@ -112,11 +113,9 @@ def aggregate_district_with_station_estimate(state_name: str):
         bio_d = bio[bio["district"] == district].drop(columns=["pincode"])
         demo_d = demo[demo["district"] == district].drop(columns=["pincode"])
 
-        # 🔑 district-wise minimum time window
         days = get_common_time_span_days(enrol_d, bio_d, demo_d)
         annual_factor = 365 / days if days > 0 else 1
 
-        # aggregate district data
         enrol_g = enrol_d.sum(numeric_only=True)
         bio_g = bio_d.sum(numeric_only=True)
         demo_g = demo_d.sum(numeric_only=True)
@@ -128,10 +127,7 @@ def aggregate_district_with_station_estimate(state_name: str):
             **demo_g.to_dict()
         }
 
-        # observed service load
         service_load_obs = calculate_service_load(row)
-
-        # annualised
         service_load_ann = service_load_obs * annual_factor
 
         stations = math.ceil(

@@ -1,300 +1,303 @@
+// Home.jsx - FIXED TIGHT LAYOUT + IMPROVED CARDS
 export default function Home() {
   return (
     <div 
-      className="page"
       style={{
-        marginLeft: '260px',  // Sidebar width
-        marginTop: '92px',    // Header height
-        padding: '40px 40px 64px 40px',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        // ✅ ZERO TOP SPACE - Perfectly flush
+        padding: '8px 32px 40px 32px', 
         width: '100%',
-        background: '#fafbfc',
+        background: '#f8fafc',
         minHeight: '100vh',
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}
     >
-      {/* Purpose-Driven Hero */}
-      <div style={{ marginBottom: '56px' }}>
+      {/* 🎯 TIGHT HERO - NO WASTED SPACE */}
+      <div style={{ 
+        marginBottom: '32px',
+        paddingBottom: '20px',
+        borderBottom: '1px solid #e2e8f0'
+      }}>
         <h1 style={{ 
-          margin: '0 0 24px 0', 
-          fontSize: '34px', 
-          fontWeight: '600',
-          color: '#111827',
-          lineHeight: '1.3',
-          letterSpacing: '-0.01em'
+          margin: '0 0 8px 0', 
+          fontSize: '32px', 
+          fontWeight: '700',
+          color: '#0f172a',
+          lineHeight: '1.2',
+          letterSpacing: '-0.015em'
         }}>
-          AadhaarPulse Analytics Platform
+          AadhaarPulse Control Center
         </h1>
-
+        
         <div style={{ 
-          color: "#6b7280", 
-          maxWidth: "680px",
+          color: "#334155", 
           fontSize: '16px',
-          lineHeight: '1.65',
-          marginBottom: '8px'
+          lineHeight: '1.55',
+          marginBottom: '4px',
+          fontWeight: '500',
+          maxWidth: '480px'
         }}>
-          Visual analytics for Aadhaar enrolment, biometric verification, 
-          and demographic update demand patterns using UIDAI datasets.
+          UIDAI Aadhaar service analytics platform
         </div>
 
         <div style={{ 
-          color: "#9ca3af", 
-          maxWidth: "680px",
-          fontSize: '15px',
-          lineHeight: '1.6'
+          color: "#64748b", 
+          fontSize: '14px',
+          lineHeight: '1.55',
+          maxWidth: '480px'
         }}>
-          Supports analysts, planners, and policymakers with state and district-level 
-          service load estimation for resource allocation and policy planning.
+          Real-time insights for enrolment demand, biometric verification, 
+          and demographic update patterns across India.
         </div>
       </div>
 
-      {/* Analytical Navigation Tiles */}
+      {/* 📊 CLEANER CARDS - BETTER FUNCTIONALITY */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "24px",
-        marginBottom: '48px'
+        gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+        gap: '20px',
+        maxWidth: '1100px'
       }}>
-        {/* National Overview */}
-        <div style={{
-          padding: '32px',
+        {/* NATIONAL OVERVIEW */}
+        <a href="/dashboard" style={{
+          textDecoration: 'none',
+          display: 'block',
+          padding: '24px',
           background: '#ffffff',
-          borderRadius: '12px',
-          border: '1px solid #e5e7eb',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-          cursor: 'pointer',
-          minHeight: '180px',
+          border: '1px solid #e2e8f0',
+          borderRadius: '10px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.06)',
+          transition: 'all 0.15s ease',
+          height: '160px',
           display: 'flex',
-          flexDirection: 'column',
-          transition: 'box-shadow 0.2s ease, border-color 0.2s ease'
+          flexDirection: 'column'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-          e.currentTarget.style.borderColor = '#d1d5db';
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+          e.currentTarget.style.borderColor = '#3b82f6';
+          e.currentTarget.style.background = '#fafbff';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-          e.currentTarget.style.borderColor = '#e5e7eb';
-        }}
-        >
+          e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.06)';
+          e.currentTarget.style.borderColor = '#e2e8f0';
+          e.currentTarget.style.background = '#ffffff';
+        }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '20px',
-            paddingBottom: '16px',
-            borderBottom: '1px solid #f3f4f6'
+            gap: '12px',
+            marginBottom: '12px'
           }}>
             <div style={{
-              width: '40px',
-              height: '40px',
+              width: '36px',
+              height: '36px',
               borderRadius: '8px',
               background: '#3b82f6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: 'white',
-              fontSize: '16px',
-              fontWeight: '600',
-              marginRight: '16px',
+              fontSize: '14px',
+              fontWeight: '700',
               flexShrink: 0
             }}>
               N
             </div>
             <h3 style={{
               margin: 0,
-              fontSize: '18px',
+              fontSize: '17px',
               fontWeight: '600',
-              color: '#111827'
+              color: '#0f172a',
+              lineHeight: '1.3'
             }}>
               National Overview
             </h3>
           </div>
 
-          <div style={{ flex: 1 }}>
-            <p style={{ 
-              color: "#374151", 
-              fontSize: "15px",
-              lineHeight: '1.6',
-              margin: '0 0 12px 0'
-            }}>
-              Aggregated enrolment, biometric, and demographic update metrics 
-              across all states and union territories.
-            </p>
-            <p style={{ 
-              color: "#6b7280", 
-              fontSize: "14px",
-              lineHeight: '1.5',
-              margin: 0
-            }}>
-              Assess national service demand patterns and capacity utilization trends.
-            </p>
+          <div style={{ 
+            margin: '0 0 2px 0',
+            color: "#374151", 
+            fontSize: "15px",
+            lineHeight: '1.45',
+            fontWeight: '500'
+          }}>
+            Aggregate enrolment and verification metrics
           </div>
-        </div>
+          <div style={{ 
+            color: "#64748b", 
+            fontSize: "14px",
+            lineHeight: '1.4'
+          }}>
+            Track national service demand patterns
+          </div>
+        </a>
 
-        {/* State Analysis */}
-        <div style={{
-          padding: '32px',
+        {/* STATE ANALYSIS */}
+        <a href="/map" style={{
+          textDecoration: 'none',
+          display: 'block',
+          padding: '24px',
           background: '#ffffff',
-          borderRadius: '12px',
-          border: '1px solid #e5e7eb',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-          cursor: 'pointer',
-          minHeight: '180px',
+          border: '1px solid #e2e8f0',
+          borderRadius: '10px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.06)',
+          transition: 'all 0.15s ease',
+          height: '160px',
           display: 'flex',
-          flexDirection: 'column',
-          transition: 'box-shadow 0.2s ease, border-color 0.2s ease'
+          flexDirection: 'column'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-          e.currentTarget.style.borderColor = '#d1d5db';
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+          e.currentTarget.style.borderColor = '#10b981';
+          e.currentTarget.style.background = '#fafffc';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-          e.currentTarget.style.borderColor = '#e5e7eb';
-        }}
-        >
+          e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.06)';
+          e.currentTarget.style.borderColor = '#e2e8f0';
+          e.currentTarget.style.background = '#ffffff';
+        }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '20px',
-            paddingBottom: '16px',
-            borderBottom: '1px solid #f3f4f6'
+            gap: '12px',
+            marginBottom: '12px'
           }}>
             <div style={{
-              width: '40px',
-              height: '40px',
+              width: '36px',
+              height: '36px',
               borderRadius: '8px',
               background: '#10b981',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: 'white',
-              fontSize: '16px',
-              fontWeight: '600',
-              marginRight: '16px',
+              fontSize: '14px',
+              fontWeight: '700',
               flexShrink: 0
             }}>
               S
             </div>
             <h3 style={{
               margin: 0,
-              fontSize: '18px',
+              fontSize: '17px',
               fontWeight: '600',
-              color: '#111827'
+              color: '#0f172a',
+              lineHeight: '1.3'
             }}>
               State Analysis
             </h3>
           </div>
 
-          <div style={{ flex: 1 }}>
-            <p style={{ 
-              color: "#374151", 
-              fontSize: "15px",
-              lineHeight: '1.6',
-              margin: '0 0 12px 0'
-            }}>
-              Comparative analysis of Aadhaar service demand across states and districts.
-            </p>
-            <p style={{ 
-              color: "#6b7280", 
-              fontSize: "14px",
-              lineHeight: '1.5',
-              margin: 0
-            }}>
-              Identify regional disparities and prioritize resource allocation.
-            </p>
+          <div style={{ 
+            margin: '0 0 2px 0',
+            color: "#374151", 
+            fontSize: "15px",
+            lineHeight: '1.45',
+            fontWeight: '500'
+          }}>
+            Comparative regional metrics
           </div>
-        </div>
+          <div style={{ 
+            color: "#64748b", 
+            fontSize: "14px",
+            lineHeight: '1.4'
+          }}>
+            Identify disparities and priorities
+          </div>
+        </a>
 
-        {/* Geographic View */}
-        <div style={{
-          padding: '32px',
+        {/* GEOGRAPHIC VIEW */}
+        <a href="/demand" style={{
+          textDecoration: 'none',
+          display: 'block',
+          padding: '24px',
           background: '#ffffff',
-          borderRadius: '12px',
-          border: '1px solid #e5e7eb',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-          cursor: 'pointer',
-          minHeight: '180px',
+          border: '1px solid #e2e8f0',
+          borderRadius: '10px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.06)',
+          transition: 'all 0.15s ease',
+          height: '160px',
           display: 'flex',
-          flexDirection: 'column',
-          transition: 'box-shadow 0.2s ease, border-color 0.2s ease'
+          flexDirection: 'column'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-          e.currentTarget.style.borderColor = '#d1d5db';
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+          e.currentTarget.style.borderColor = '#f59e0b';
+          e.currentTarget.style.background = '#fffaf5';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-          e.currentTarget.style.borderColor = '#e5e7eb';
-        }}
-        >
+          e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.06)';
+          e.currentTarget.style.borderColor = '#e2e8f0';
+          e.currentTarget.style.background = '#ffffff';
+        }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '20px',
-            paddingBottom: '16px',
-            borderBottom: '1px solid #f3f4f6'
+            gap: '12px',
+            marginBottom: '12px'
           }}>
             <div style={{
-              width: '40px',
-              height: '40px',
+              width: '36px',
+              height: '36px',
               borderRadius: '8px',
               background: '#f59e0b',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: 'white',
-              fontSize: '16px',
-              fontWeight: '600',
-              marginRight: '16px',
+              fontSize: '14px',
+              fontWeight: '700',
               flexShrink: 0
             }}>
               G
             </div>
             <h3 style={{
               margin: 0,
-              fontSize: '18px',
+              fontSize: '17px',
               fontWeight: '600',
-              color: '#111827'
+              color: '#0f172a',
+              lineHeight: '1.3'
             }}>
               Geographic View
             </h3>
           </div>
 
-          <div style={{ flex: 1 }}>
-            <p style={{ 
-              color: "#374151", 
-              fontSize: "15px",
-              lineHeight: '1.6',
-              margin: '0 0 12px 0'
-            }}>
-              Spatial visualization of Aadhaar service demand at district level.
-            </p>
-            <p style={{ 
-              color: "#6b7280", 
-              fontSize: "14px",
-              lineHeight: '1.5',
-              margin: 0
-            }}>
-              Map-based insights for location-specific planning and monitoring.
-            </p>
+          <div style={{ 
+            margin: '0 0 2px 0',
+            color: "#374151", 
+            fontSize: "15px",
+            lineHeight: '1.45',
+            fontWeight: '500'
+          }}>
+            District-level spatial analysis
           </div>
-        </div>
+          <div style={{ 
+            color: "#64748b", 
+            fontSize: "14px",
+            lineHeight: '1.4'
+          }}>
+            Location-specific planning tools
+          </div>
+        </a>
       </div>
 
-      {/* Subtle informational footer */}
-      <p style={{
-        fontSize: "12px",
-        color: "#9ca3af",
-        textAlign: 'center',
-        margin: 0,
-        paddingTop: '32px',
-        borderTop: '1px solid #f3f4f6',
-        letterSpacing: '0.025em'
+      {/* 📈 TIGHT FOOTER */}
+      <div style={{
+        marginTop: '32px',
+        paddingTop: '20px',
+        borderTop: '1px solid #e2e8f0',
+        textAlign: 'left',
+        paddingLeft: '2px'
       }}>
-        Built for UIDAI Hackathon
-      </p>
+        <p style={{
+          fontSize: "12px",
+          color: "#6b7280",
+          margin: 0,
+          letterSpacing: '0.025em',
+          fontWeight: '500'
+        }}>
+          UIDAI Smart India Hackathon • Analytics Platform
+        </p>
+      </div>
     </div>
   );
 }

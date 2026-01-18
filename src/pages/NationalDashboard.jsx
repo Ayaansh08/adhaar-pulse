@@ -1,14 +1,8 @@
-// src/pages/NationalDashboard.jsx - CLEAN VERSION (NO TABS/HEADING)
+// NationalDashboard.jsx - ALIGNMENT FIXED ONLY
 import React, { useEffect, useState } from "react";
 import { KPIGrid, LoadingCard, ErrorCard } from "../components/DashboardComponents";
 
 const API = "http://127.0.0.1:8000";
-
-const CONTAINER_STYLE = {
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 24px'
-};
 
 const designTokens = {
   spacing: { 6: '24px', 8: '32px', 12: '48px' },
@@ -78,188 +72,189 @@ export default function NationalDashboard() {
 
   return (
     <div style={{
+      // ✅ SAME ALIGNMENT AS HOME/DASHBOARD
+      padding: '8px 0 0 0', 
+      width: '100%',
+      background: '#f8fafc',
       minHeight: '100vh',
-      background: `linear-gradient(135deg, ${designTokens.colors.slate50} 0%, #f8fcff 100%)`,
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <div style={CONTAINER_STYLE}>
-        
-        {/* NATIONAL SERVICE CONTEXT - STARTS DIRECTLY */}
-        <section style={{
-          background: '#ffffff',
-          borderRadius: designTokens.radius.lg,
-          border: `1px solid ${designTokens.colors.slate200}`,
-          padding: designTokens.spacing[12],
-          boxShadow: designTokens.shadows.md,
-          marginBottom: designTokens.spacing[8],
-          borderLeft: `4px solid ${designTokens.colors.blue500}`
-        }}>
-          <div style={{ display: 'flex', gap: designTokens.spacing[6], alignItems: 'flex-start' }}>
+      {/* ✅ NO EXTRA CONTAINER - Uses parent 32px padding */}
+      {/* NATIONAL SERVICE CONTEXT - STARTS DIRECTLY */}
+      <section style={{
+        background: '#ffffff',
+        borderRadius: designTokens.radius.lg,
+        border: `1px solid ${designTokens.colors.slate200}`,
+        padding: designTokens.spacing[12],
+        boxShadow: designTokens.shadows.md,
+        marginBottom: designTokens.spacing[8],
+        borderLeft: `4px solid ${designTokens.colors.blue500}`
+      }}>
+        <div style={{ display: 'flex', gap: designTokens.spacing[6], alignItems: 'flex-start' }}>
+          <div style={{
+            flexShrink: 0,
+            width: '4px',
+            height: '24px',
+            background: designTokens.colors.blue500,
+            borderRadius: '2px',
+            marginTop: '4px'
+          }} />
+          <div style={{ flex: 1 }}>
+            <h2 style={{
+              fontSize: '20px',
+              fontWeight: 600,
+              color: designTokens.colors.slate900,
+              margin: '0 0 16px 0'
+            }}>
+              National Service Load Breakdown
+            </h2>
+            <p style={{
+              fontSize: '16px',
+              color: designTokens.colors.slate700,
+              lineHeight: 1.7,
+              margin: '0 0 24px 0'
+            }}>
+              Aggregated Aadhaar activity across India, weighted by service complexity.
+            </p>
+            
             <div style={{
-              flexShrink: 0,
-              width: '4px',
-              height: '24px',
-              background: designTokens.colors.blue500,
-              borderRadius: '2px',
-              marginTop: '4px'
-            }} />
-            <div style={{ flex: 1 }}>
-              <h2 style={{
-                fontSize: '20px',
-                fontWeight: 600,
-                color: designTokens.colors.slate900,
-                margin: '0 0 16px 0'
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: designTokens.spacing[6]
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: `${designTokens.spacing[6]} ${designTokens.spacing[8]}`,
+                background: designTokens.colors.slate50,
+                borderRadius: designTokens.radius.md,
+                borderRight: `3px solid ${designTokens.colors.green500}`
               }}>
-                National Service Load Breakdown
-              </h2>
-              <p style={{
-                fontSize: '16px',
-                color: designTokens.colors.slate700,
-                lineHeight: 1.7,
-                margin: '0 0 24px 0'
-              }}>
-                Aggregated Aadhaar activity across India, weighted by service complexity.
-              </p>
+                <div style={{
+                  flex: '0 0 60px',
+                  height: '12px',
+                  background: `linear-gradient(90deg, ${designTokens.colors.green500} 0%, ${designTokens.colors.green500} ${enrolPercent}%, transparent ${enrolPercent}%)`,
+                  borderRadius: '6px'
+                }} />
+                <div>
+                  <div style={{ fontSize: '15px', fontWeight: 600, color: designTokens.colors.slate900, marginBottom: '4px' }}>
+                    Enrolments ({enrolPercent}%)
+                  </div>
+                  <div style={{ fontSize: '14px', color: designTokens.colors.slate600, fontWeight: 500 }}>
+                    {totalEnrol.toLocaleString()}
+                  </div>
+                </div>
+              </div>
               
               <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                gap: designTokens.spacing[6]
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: `${designTokens.spacing[6]} ${designTokens.spacing[8]}`,
+                background: designTokens.colors.slate50,
+                borderRadius: designTokens.radius.md,
+                borderRight: `3px solid ${designTokens.colors.blue500}`
               }}>
                 <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: `${designTokens.spacing[6]} ${designTokens.spacing[8]}`,
-                  background: designTokens.colors.slate50,
-                  borderRadius: designTokens.radius.md,
-                  borderRight: `3px solid ${designTokens.colors.green500}`
-                }}>
-                  <div style={{
-                    flex: '0 0 60px',
-                    height: '12px',
-                    background: `linear-gradient(90deg, ${designTokens.colors.green500} 0%, ${designTokens.colors.green500} ${enrolPercent}%, transparent ${enrolPercent}%)`,
-                    borderRadius: '6px'
-                  }} />
-                  <div>
-                    <div style={{ fontSize: '15px', fontWeight: 600, color: designTokens.colors.slate900, marginBottom: '4px' }}>
-                      Enrolments ({enrolPercent}%)
-                    </div>
-                    <div style={{ fontSize: '14px', color: designTokens.colors.slate600, fontWeight: 500 }}>
-                      {totalEnrol.toLocaleString()}
-                    </div>
+                  flex: '0 0 60px',
+                  height: '12px',
+                  background: `linear-gradient(90deg, ${designTokens.colors.blue500} 0%, ${designTokens.colors.blue500} ${biometricPercent}%, transparent ${biometricPercent}%)`,
+                  borderRadius: '6px'
+                }} />
+                <div>
+                  <div style={{ fontSize: '15px', fontWeight: 600, color: designTokens.colors.slate900, marginBottom: '4px' }}>
+                    Biometric Updates ({biometricPercent}%)
+                  </div>
+                  <div style={{ fontSize: '14px', color: designTokens.colors.slate600, fontWeight: 500 }}>
+                    {biometricUpdates.toLocaleString()}
                   </div>
                 </div>
-                
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: `${designTokens.spacing[6]} ${designTokens.spacing[8]}`,
-                  background: designTokens.colors.slate50,
-                  borderRadius: designTokens.radius.md,
-                  borderRight: `3px solid ${designTokens.colors.blue500}`
-                }}>
-                  <div style={{
-                    flex: '0 0 60px',
-                    height: '12px',
-                    background: `linear-gradient(90deg, ${designTokens.colors.blue500} 0%, ${designTokens.colors.blue500} ${biometricPercent}%, transparent ${biometricPercent}%)`,
-                    borderRadius: '6px'
-                  }} />
-                  <div>
-                    <div style={{ fontSize: '15px', fontWeight: 600, color: designTokens.colors.slate900, marginBottom: '4px' }}>
-                      Biometric Updates ({biometricPercent}%)
-                    </div>
-                    <div style={{ fontSize: '14px', color: designTokens.colors.slate600, fontWeight: 500 }}>
-                      {biometricUpdates.toLocaleString()}
-                    </div>
-                  </div>
-                </div>
+              </div>
 
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: `${designTokens.spacing[6]} ${designTokens.spacing[8]}`,
+                background: designTokens.colors.slate50,
+                borderRadius: designTokens.radius.md,
+                borderRight: `3px solid ${designTokens.colors.orange500}`
+              }}>
                 <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: `${designTokens.spacing[6]} ${designTokens.spacing[8]}`,
-                  background: designTokens.colors.slate50,
-                  borderRadius: designTokens.radius.md,
-                  borderRight: `3px solid ${designTokens.colors.orange500}`
-                }}>
-                  <div style={{
-                    flex: '0 0 60px',
-                    height: '12px',
-                    background: `linear-gradient(90deg, ${designTokens.colors.orange500} 0%, ${designTokens.colors.orange500} ${demographicPercent}%, transparent ${demographicPercent}%)`,
-                    borderRadius: '6px'
-                  }} />
-                  <div>
-                    <div style={{ fontSize: '15px', fontWeight: 600, color: designTokens.colors.slate900, marginBottom: '4px' }}>
-                      Demographic Updates ({demographicPercent}%)
-                    </div>
-                    <div style={{ fontSize: '14px', color: designTokens.colors.slate600, fontWeight: 500 }}>
-                      {demographicUpdates.toLocaleString()}
-                    </div>
+                  flex: '0 0 60px',
+                  height: '12px',
+                  background: `linear-gradient(90deg, ${designTokens.colors.orange500} 0%, ${designTokens.colors.orange500} ${demographicPercent}%, transparent ${demographicPercent}%)`,
+                  borderRadius: '6px'
+                }} />
+                <div>
+                  <div style={{ fontSize: '15px', fontWeight: 600, color: designTokens.colors.slate900, marginBottom: '4px' }}>
+                    Demographic Updates ({demographicPercent}%)
+                  </div>
+                  <div style={{ fontSize: '14px', color: designTokens.colors.slate600, fontWeight: 500 }}>
+                    {demographicUpdates.toLocaleString()}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* KPI SECTION */}
-        <section style={{ marginBottom: designTokens.spacing[8] }}>
-          <div style={{
-            background: '#ffffff',
-            borderRadius: designTokens.radius.lg,
-            border: `1px solid ${designTokens.colors.slate200}`,
-            padding: designTokens.spacing[12],
-            boxShadow: designTokens.shadows.md,
-            borderTop: `3px solid ${designTokens.colors.blue500}`
-          }}>
-            <h3 style={{
-              fontSize: '18px',
-              fontWeight: 600,
-              color: designTokens.colors.slate900,
-              margin: '0 0 24px 0'
-            }}>
-              National Key Metrics
-            </h3>
-            <KPIGrid 
-              items={[
-                ["Service Load", nationalLoad.toLocaleString()],
-                ["Total Enrolments", totalEnrol.toLocaleString()],
-                ["Biometric Updates", biometricUpdates.toLocaleString()],
-                ["Demographic Updates", demographicUpdates.toLocaleString()]
-              ]} 
-            />
-          </div>
-        </section>
-
-        {/* METHODOLOGY */}
-        <section style={{
-          background: designTokens.colors.slate50,
+      {/* KPI SECTION */}
+      <section style={{ marginBottom: designTokens.spacing[8] }}>
+        <div style={{
+          background: '#ffffff',
           borderRadius: designTokens.radius.lg,
           border: `1px solid ${designTokens.colors.slate200}`,
-          padding: designTokens.spacing[8],
-          boxShadow: designTokens.shadows.sm
+          padding: designTokens.spacing[12],
+          boxShadow: designTokens.shadows.md,
+          borderTop: `3px solid ${designTokens.colors.blue500}`
         }}>
-          <h4 style={{
-            fontSize: '15px',
+          <h3 style={{
+            fontSize: '18px',
             fontWeight: 600,
-            color: designTokens.colors.slate800,
-            margin: '0 0 8px 0'
+            color: designTokens.colors.slate900,
+            margin: '0 0 24px 0'
           }}>
-            Methodology
-          </h4>
-          <p style={{
-            fontSize: '14px',
-            color: designTokens.colors.slate700,
-            lineHeight: 1.6,
-            margin: 0
-          }}>
-            Age-based complexity factors applied to service load calculation.
-          </p>
-        </section>
-      </div>
+            National Key Metrics
+          </h3>
+          <KPIGrid 
+            items={[
+              ["Service Load", nationalLoad.toLocaleString()],
+              ["Total Enrolments", totalEnrol.toLocaleString()],
+              ["Biometric Updates", biometricUpdates.toLocaleString()],
+              ["Demographic Updates", demographicUpdates.toLocaleString()]
+            ]} 
+          />
+        </div>
+      </section>
+
+      {/* METHODOLOGY */}
+      <section style={{
+        background: designTokens.colors.slate50,
+        borderRadius: designTokens.radius.lg,
+        border: `1px solid ${designTokens.colors.slate200}`,
+        padding: designTokens.spacing[8],
+        boxShadow: designTokens.shadows.sm
+      }}>
+        <h4 style={{
+          fontSize: '15px',
+          fontWeight: 600,
+          color: designTokens.colors.slate800,
+          margin: '0 0 8px 0'
+        }}>
+          Methodology
+        </h4>
+        <p style={{
+          fontSize: '14px',
+          color: designTokens.colors.slate700,
+          lineHeight: 1.6,
+          margin: 0
+        }}>
+          Age-based complexity factors applied to service load calculation.
+        </p>
+      </section>
     </div>
   );
 }

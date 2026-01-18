@@ -29,3 +29,23 @@ def load_csv_folder(folder_name: str) -> pd.DataFrame:
     combined_df = pd.concat(df_list, ignore_index=True)
 
     return combined_df
+
+
+def load_clean_csv(dataset_name: str) -> pd.DataFrame:
+    """
+    Loads a cleaned CSV file from backend/data/cleaned/
+    Example: enrolment_clean.csv
+    """
+    cleaned_path = os.path.join(
+        BASE_DATA_PATH,
+        "cleaned",
+        f"{dataset_name}_clean.csv"
+    )
+
+    if not os.path.exists(cleaned_path):
+        raise FileNotFoundError(
+            f"Cleaned file not found: {cleaned_path}. "
+            f"Run data cleaning first."
+        )
+
+    return pd.read_csv(cleaned_path)

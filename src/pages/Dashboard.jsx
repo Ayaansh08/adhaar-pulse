@@ -1,13 +1,13 @@
-// src/pages/Dashboard.jsx - PERFECT ALIGNMENT v1.4 (DemandAnalysis Pattern)
+// Dashboard.jsx - FIXED ALIGNMENT ONLY (Same padding as Home)
 import React, { useState } from "react";
 import NationalDashboard from "./NationalDashboard";
 import StateDashboard from "./StateDashboard";
 import DistrictDashboard from "./DistrictDashboard";
 
 const CONTAINER_STYLE = {
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 24px'
+  // ✅ SAME ALIGNMENT AS HOME PAGE
+  padding: '8px 32px 40px 32px', 
+  width: '100%'
 };
 
 const designTokens = {
@@ -48,25 +48,21 @@ export default function Dashboard() {
     outline: 'none'
   });
 
-  // ✅ SAME MainContainer as DemandAnalysis
-  const MainContainer = ({ children }) => (
+  // ✅ SIMPLIFIED - SAME BACKGROUND AS MAIN
+  return (
     <div style={{
+      // ✅ PERFECTLY FLUSH ALIGNMENT
+      padding: '8px 32px 40px 32px',
+      width: '100%',
+      background: '#f8fafc',
       minHeight: '100vh',
-      background: `linear-gradient(135deg, ${designTokens.colors.slate50} 0%, #f8fcff 100%)`,
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <div style={CONTAINER_STYLE}>
-        {children}
-      </div>
-    </div>
-  );
-
-  return (
-    <MainContainer>
-      {/* TABS - SAME 1200px CONTAINER */}
+      {/* TABS - SAME RHYTHM AS HOME */}
       <div style={{ 
-        marginBottom: designTokens.spacing.xl,
-        padding: `${designTokens.spacing.sm} 0`
+        marginBottom: '28px',
+        paddingBottom: '20px',
+        borderBottom: '1px solid #e2e8f0'
       }}>
         <div style={{ 
           display: "flex", 
@@ -90,12 +86,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* CONTENT - NO FULLSCREEN, JUST CONTENT */}
+      {/* CONTENT - PERFECTLY ALIGNED */}
       <div style={{ height: 'auto', width: '100%' }}>
         {view === "national" && <NationalDashboard />}
         {view === "state" && <StateDashboard />}
         {view === "district" && <DistrictDashboard />}
       </div>
-    </MainContainer>
+    </div>
   );
 }

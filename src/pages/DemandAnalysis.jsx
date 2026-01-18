@@ -1,17 +1,9 @@
-// src/pages/DemandAnalysis.jsx - PERFECT ALIGNMENT & CONSISTENCY v4.0
-import React, { useEffect, useState, useRef, useCallback } from "react";
+// src/pages/DemandAnalysis.jsx - STRICT ALIGNMENT + DROPDOWN ONLY (COMPLETE)
+import React, { useEffect, useState } from "react";
 import { Section, LoadingCard, ErrorCard, KPIGrid } from "../components/DashboardComponents";
 
 const API = "http://127.0.0.1:8000";
 
-// PERFECTLY ALIGNED LAYOUT SYSTEM - SINGLE RESPONSIBLE CONTAINER
-const CONTAINER_STYLE = {
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 24px'
-};
-
-// Enterprise Design Tokens - Production Ready
 const designTokens = {
   spacing: { 4: '16px', 6: '24px', 8: '32px', 12: '48px' },
   radius: { md: '12px', lg: '16px' },
@@ -28,21 +20,13 @@ const designTokens = {
 };
 
 export default function DemandAnalysis() {
-  // [ALL EXISTING STATE & LOGIC UNCHANGED - PERFECTLY PRESERVED]
   const [states, setStates] = useState([]);
   const [stationsData, setStationsData] = useState(null);
   const [selectedState, setSelectedState] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
-  const [stateSearch, setStateSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
-  const [isDistrictDropdownOpen, setIsDistrictDropdownOpen] = useState(false);
-  
-  const stateDropdownRef = useRef(null);
-  const districtDropdownRef = useRef(null);
 
-  // [ALL useEffect & handlers unchanged - ZERO FUNCTIONAL CHANGES]
   useEffect(() => {
     async function loadStates() {
       try {
@@ -84,19 +68,6 @@ export default function DemandAnalysis() {
     loadStations();
   }, [selectedState]);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (stateDropdownRef.current && !stateDropdownRef.current.contains(event.target)) {
-        setIsStateDropdownOpen(false);
-      }
-      if (districtDropdownRef.current && !districtDropdownRef.current.contains(event.target)) {
-        setIsDistrictDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const getSelectedDistrictData = () => {
     if (!selectedDistrict || !stationsData?.data) return null;
     return stationsData.data.find(d => 
@@ -116,32 +87,29 @@ export default function DemandAnalysis() {
         .sort((a, b) => a.localeCompare(b))
     : [];
 
-  const filteredStateOptions = stateOptions.filter((name) =>
-    name.toLowerCase().includes(stateSearch.toLowerCase())
-  );
-
   const districtData = getSelectedDistrictData();
   const sortedDistricts = (stationsData?.data || []).sort((a, b) => 
     (b.estimated_stations_needed || 0) - (a.estimated_stations_needed || 0)
   );
 
-  const handleSelectState = useCallback((name) => {
-    setStateSearch(name);
-    const found = states.find((s) => s.state?.trim() === name);
-    setSelectedState(found || null);
-    setSelectedDistrict(null);
-    setIsStateDropdownOpen(false);
-  }, [states]);
+  const handleStateChange = (e) => {
+    const name = e.target.value;
+    if (name) {
+      const found = states.find((s) => s.state?.trim() === name);
+      setSelectedState(found || null);
+      setSelectedDistrict(null);
+    } else {
+      setSelectedState(null);
+    }
+  };
 
-  const handleSelectDistrict = useCallback((name) => {
-    setSelectedDistrict(name);
-    setIsDistrictDropdownOpen(false);
-  }, []);
+  const handleDistrictChange = (e) => {
+    setSelectedDistrict(e.target.value);
+  };
 
   if (loading) return <LoadingCard />;
 
-  // PERFECTLY ALIGNED HELPER FUNCTIONS
-  const getInputStyle = (isActive, accentColor) => ({
+  const getSelectStyle = (isActive, accentColor) => ({
     width: '100%',
     height: '56px',
     padding: '0 20px',
@@ -153,40 +121,28 @@ export default function DemandAnalysis() {
     color: designTokens.colors.slate900,
     outline: 'none',
     boxShadow: isActive ? designTokens.shadows.md : designTokens.shadows.sm,
-    transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)'
+    transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+    cursor: 'pointer',
+    appearance: 'none',
+    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+    backgroundPosition: 'right 12px center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '20px',
+    paddingRight: '48px'
   });
-
-  const getDropdownStyle = (accentColor) => ({
-    position: 'absolute',
-    top: '100%',
-    left: 0,
-    right: 0,
-    background: '#ffffff',
-    border: `2px solid ${accentColor}`,
-    borderTop: 'none',
-    borderRadius: `0 0 ${designTokens.radius.lg} ${designTokens.radius.lg}`,
-    maxHeight: '320px',
-    overflowY: 'auto',
-    zIndex: 1000,
-    boxShadow: designTokens.shadows.lg
-  });
-
-  // SINGLE PERFECTLY ALIGNED CONTAINER WRAPPER
-  const MainContainer = ({ children }) => (
-    <div style={{
-      minHeight: '100vh',
-      background: `linear-gradient(135deg, ${designTokens.colors.slate50} 0%, #f8fcff 100%)`,
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
-      <div style={CONTAINER_STYLE}>
-        {children}
-      </div>
-    </div>
-  );
 
   return (
-    <MainContainer>
-      {/* ✅ SINGLE PAGE HEADER - PERFECTLY ALIGNED */}
+    <div style={{
+      // ✅ STRICT DASHBOARD ALIGNMENT: 8px top, 32px sides
+      padding: '8px 32px 40px 32px',
+      width: '100%',
+      background: '#f8fafc',
+      minHeight: '100vh',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
+      {error && <ErrorCard error={error} />}
+
+      {/* ✅ PAGE HEADER */}
       <header style={{
         padding: `${designTokens.spacing[8]} 0 ${designTokens.spacing[6]}`,
         borderBottom: `1px solid ${designTokens.colors.slate200}`,
@@ -211,9 +167,7 @@ export default function DemandAnalysis() {
         </p>
       </header>
 
-      {error && <ErrorCard error={error} />}
-
-      {/* FILTERS - PERFECTLY ALIGNED WITH HEADER */}
+      {/* ✅ DROPDOWNS ONLY - NO SEARCH */}
       <section style={{ marginBottom: designTokens.spacing[12] }}>
         <div style={{
           background: '#ffffff',
@@ -228,103 +182,40 @@ export default function DemandAnalysis() {
             gap: '32px',
             alignItems: 'end'
           }}>
-            {/* STATE DROPDOWN */}
-            <div style={{ position: 'relative' }} ref={stateDropdownRef}>
-              <input
-                type="text"
-                value={stateSearch}
-                onChange={(e) => {
-                  setStateSearch(e.target.value);
-                  setSelectedState(null);
-                  setSelectedDistrict(null);
-                  setStationsData(null);
-                  setError(null);
-                  setIsStateDropdownOpen(e.target.value.length > 0);
-                }}
-                onFocus={() => stateSearch && setIsStateDropdownOpen(true)}
-                placeholder="Select state..."
-                style={getInputStyle(!!selectedState, designTokens.colors.blue500)}
-                onMouseEnter={(e) => {
-                  e.target.style.borderColor = designTokens.colors.blue500;
-                  e.target.style.boxShadow = designTokens.shadows.lg;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.borderColor = selectedState ? designTokens.colors.blue500 : designTokens.colors.slate200;
-                  e.target.style.boxShadow = selectedState ? designTokens.shadows.md : designTokens.shadows.sm;
-                }}
-              />
-              {isStateDropdownOpen && filteredStateOptions.length > 0 && (
-                <div style={getDropdownStyle(designTokens.colors.blue500)}>
-                  {filteredStateOptions.map((name) => (
-                    <div
-                      key={name}
-                      onClick={() => handleSelectState(name)}
-                      style={{
-                        padding: '16px 20px',
-                        cursor: 'pointer',
-                        background: selectedState?.state?.trim() === name ? designTokens.colors.slate100 : '#ffffff',
-                        borderBottom: `1px solid ${designTokens.colors.slate200}`,
-                        fontSize: '16px',
-                        transition: 'background-color 150ms ease'
-                      }}
-                      onMouseEnter={(e) => e.target.style.background = designTokens.colors.slate100}
-                      onMouseLeave={(e) => e.target.style.background = selectedState?.state?.trim() === name ? designTokens.colors.slate100 : '#ffffff'}
-                    >
-                      {name}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            {/* ✅ STATE SELECT - NO SEARCH */}
+            <select
+              value={selectedState?.state || ''}
+              onChange={handleStateChange}
+              style={getSelectStyle(!!selectedState, designTokens.colors.blue500)}
+            >
+              <option value="">Select state…</option>
+              {stateOptions.map((name) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
 
-            {/* DISTRICT DROPDOWN */}
+            {/* ✅ DISTRICT SELECT - NO SEARCH */}
             {selectedState && stationsData && (
-              <div style={{ position: 'relative' }} ref={districtDropdownRef}>
-                <input
-                  type="text"
-                  value={selectedDistrict || ""}
-                  onChange={(e) => setSelectedDistrict(e.target.value)}
-                  onFocus={() => setIsDistrictDropdownOpen(true)}
-                  placeholder="Select district..."
-                  style={getInputStyle(!!selectedDistrict, designTokens.colors.green500)}
-                  onMouseEnter={(e) => {
-                    e.target.style.borderColor = designTokens.colors.green500;
-                    e.target.style.boxShadow = designTokens.shadows.lg;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.borderColor = selectedDistrict ? designTokens.colors.green500 : designTokens.colors.slate200;
-                    e.target.style.boxShadow = selectedDistrict ? designTokens.shadows.md : designTokens.shadows.sm;
-                  }}
-                />
-                {isDistrictDropdownOpen && districtOptions.length > 0 && (
-                  <div style={getDropdownStyle(designTokens.colors.green500)}>
-                    {districtOptions.map((name) => (
-                      <div
-                        key={name}
-                        onClick={() => handleSelectDistrict(name)}
-                        style={{
-                          padding: '16px 20px',
-                          cursor: 'pointer',
-                          background: selectedDistrict === name ? designTokens.colors.slate100 : '#ffffff',
-                          borderBottom: `1px solid ${designTokens.colors.slate200}`,
-                          fontSize: '16px',
-                          transition: 'background-color 150ms ease'
-                        }}
-                        onMouseEnter={(e) => e.target.style.background = designTokens.colors.slate100}
-                        onMouseLeave={(e) => e.target.style.background = selectedDistrict === name ? designTokens.colors.slate100 : '#ffffff'}
-                      >
-                        {name}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <select
+                value={selectedDistrict || ''}
+                onChange={handleDistrictChange}
+                style={getSelectStyle(!!selectedDistrict, designTokens.colors.green500)}
+              >
+                <option value="">Select district…</option>
+                {districtOptions.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
             )}
           </div>
         </div>
       </section>
 
-      {/* ✅ DISTRICT DETAIL - PERFECTLY ALIGNED */}
+      {/* ✅ DISTRICT DETAIL */}
       {selectedState && selectedDistrict && districtData && (
         <section style={{ marginBottom: designTokens.spacing[12] }}>
           <div style={{ 
@@ -342,14 +233,13 @@ export default function DemandAnalysis() {
             </h2>
           </div>
 
-          {/* KPI CARDS - BASELINE ALIGNED */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '32px',
             marginBottom: designTokens.spacing[12]
           }}>
-            {[ 
+            {[
               { value: districtData.estimated_stations_needed || 0, label: 'Stations Needed', color: designTokens.colors.green500 },
               { value: Math.round(districtData.service_load_annualised || 0).toLocaleString(), label: 'Annual Load', color: designTokens.colors.blue500 },
               { value: `${districtData.time_window_days} days`, label: 'Time Window', color: designTokens.colors.orange500 }
@@ -365,18 +255,8 @@ export default function DemandAnalysis() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textAlign: 'center',
-                boxShadow: designTokens.shadows.md,
-                transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = designTokens.shadows.lg;
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = designTokens.shadows.md;
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-              >
+                boxShadow: designTokens.shadows.md
+              }}>
                 <div style={{
                   fontSize: idx === 0 ? 'clamp(28px, 8vw, 36px)' : 'clamp(24px, 6vw, 32px)',
                   fontWeight: 700,
@@ -399,7 +279,6 @@ export default function DemandAnalysis() {
             ))}
           </div>
 
-          {/* CALCULATION DETAILS */}
           <div style={{
             background: designTokens.colors.slate50,
             border: `1px solid ${designTokens.colors.slate200}`,
@@ -428,7 +307,7 @@ export default function DemandAnalysis() {
         </section>
       )}
 
-      {/* ✅ STATE OVERVIEW - PERFECTLY ALIGNED */}
+      {/* ✅ STATE OVERVIEW */}
       {selectedState && stationsData && !selectedDistrict && (
         <section style={{ marginBottom: designTokens.spacing[12] }}>
           <div style={{ 
@@ -511,12 +390,8 @@ export default function DemandAnalysis() {
                   {sortedDistricts.slice(0, 10).map((district, idx) => (
                     <tr key={idx} style={{
                       background: idx % 2 === 0 ? '#ffffff' : designTokens.colors.slate50,
-                      transition: 'background-color 150ms ease',
                       borderBottom: `1px solid ${designTokens.colors.slate200}`
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.background = designTokens.colors.slate100}
-                    onMouseLeave={(e) => e.currentTarget.style.background = idx % 2 === 0 ? '#ffffff' : designTokens.colors.slate50}
-                    >
+                    }}>
                       <td style={{
                         padding: '20px 24px',
                         fontWeight: 500,
@@ -548,7 +423,7 @@ export default function DemandAnalysis() {
         </section>
       )}
 
-      {/* ✅ EMPTY STATE - NO TITLE DUPLICATION, PERFECTLY ALIGNED */}
+      {/* ✅ EMPTY STATE */}
       {!selectedState && !loading && (
         <section style={{
           textAlign: 'center',
@@ -575,6 +450,6 @@ export default function DemandAnalysis() {
           </div>
         </section>
       )}
-    </MainContainer>
+    </div>
   );
 }

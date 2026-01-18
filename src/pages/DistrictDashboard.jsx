@@ -1,14 +1,8 @@
-// src/pages/DistrictDashboard.jsx - DROPDOWN REPLACEMENT v2.0 (NO SEARCH INPUT)
+// src/pages/DistrictDashboard.jsx - PERFECTLY ALIGNED (COMPLETE)
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { LoadingCard, KPIGrid, AgeTable } from "../components/DashboardComponents";
 
 const API = "http://127.0.0.1:8000";
-
-const CONTAINER_STYLE = {
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 24px'
-};
 
 const designTokens = {
   spacing: { 6: '24px', 8: '32px', 12: '48px' },
@@ -139,19 +133,6 @@ export default function DistrictDashboard() {
 
   if (loading) return <LoadingCard />;
 
-  // Main Container
-  const MainContainer = ({ children }) => (
-    <div style={{
-      minHeight: '100vh',
-      background: `linear-gradient(135deg, ${designTokens.colors.slate50} 0%, #f8fcff 100%)`,
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
-      <div style={CONTAINER_STYLE}>
-        {children}
-      </div>
-    </div>
-  );
-
   const getSelectStyle = (isActive, accentColor) => ({
     width: '100%',
     height: '56px',
@@ -186,8 +167,15 @@ export default function DistrictDashboard() {
   const demographicPercent = totalServices > 0 ? Math.round((demographicUpdates / totalServices) * 100) : 0;
 
   return (
-    <MainContainer>
-      {/* ✅ PROPER DROPDOWNS - NO SEARCH INPUT */}
+    <div style={{
+      // ✅ PERFECT ALIGNMENT - SAME AS NATIONAL/STATE DASHBOARDS
+      padding: '8px 0 0 0',
+      width: '100%',
+      background: '#f8fafc',
+      minHeight: '100vh',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
+      {/* ✅ DROPDOWNS SECTION - Uses parent 32px padding */}
       <section style={{ marginBottom: designTokens.spacing[8] }}>
         <div style={{
           background: '#ffffff',
@@ -258,7 +246,7 @@ export default function DistrictDashboard() {
         </div>
       </section>
 
-      {/* DASHBOARD CONTENT - SAME AS BEFORE */}
+      {/* DASHBOARD CONTENT */}
       {selectedDistrict ? (
         <>
           {/* CONTEXT HEADER */}
@@ -520,6 +508,6 @@ export default function DistrictDashboard() {
           </div>
         </section>
       )}
-    </MainContainer>
+    </div>
   );
 }
