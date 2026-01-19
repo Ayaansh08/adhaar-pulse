@@ -1,0 +1,1526 @@
+[
+  {
+    "dataset": "enrolment",
+    "timestamp": "2026-01-16T05:09:12.336056",
+    "rows_processed": 1006007,
+    "corrections_count": 1405,
+    "corrections_sample": [
+      {
+        "type": "state_fuzzy",
+        "from": "The Dadra And Nagar Haveli And Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "The Dadra And Nagar Haveli And Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "West  Bengal",
+        "to": "West Bengal"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "invalid_state",
+        "from": "100000",
+        "to": null
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "West Bangal",
+        "to": "West Bengal"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "invalid_state",
+        "from": "100000",
+        "to": null
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "West  Bengal",
+        "to": "West Bengal"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      }
+    ]
+  },
+  {
+    "dataset": "biometric_update",
+    "timestamp": "2026-01-16T05:13:50.712470",
+    "rows_processed": 1861108,
+    "corrections_count": 4413,
+    "corrections_sample": [
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      }
+    ]
+  },
+  {
+    "dataset": "demographic_update",
+    "timestamp": "2026-01-16T05:17:10.043777",
+    "rows_processed": 2071698,
+    "corrections_count": 4378,
+    "corrections_sample": [
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "West  Bengal",
+        "to": "West Bengal"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "West  Bengal",
+        "to": "West Bengal"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "West Bangal",
+        "to": "West Bengal"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman And Diu",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra & Nagar Haveli",
+        "to": "Dadra And Nagar Haveli"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Dadra And Nagar Haveli",
+        "to": "Dadra And Nagar Haveli And Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Daman & Diu",
+        "to": "Daman And Diu"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Jammu & Kashmir",
+        "to": "Jammu And Kashmir"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_fuzzy",
+        "from": "Andaman & Nicobar Islands",
+        "to": "Andaman And Nicobar Islands"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      },
+      {
+        "type": "state_alias",
+        "from": "Pondicherry",
+        "to": "Puducherry"
+      }
+    ]
+  }
+]
