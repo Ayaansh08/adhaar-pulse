@@ -1,9 +1,10 @@
 # Python
 backend/venv/
-backend/*.db
-backend/data/
 __pycache__/
 *.pyc
+
+# Keep database chunks but exclude full database (it will be combined on startup)
+backend/aadhaar_pulse.db
 
 # Node
 node_modules/

@@ -6,6 +6,10 @@ from sqlalchemy import func, and_, desc
 from typing import List, Optional
 from datetime import datetime, date
 
+# Auto-combine database chunks on startup
+from combine_chunks import combine_chunks
+combine_chunks()
+
 from database import get_db, init_db
 from models import MigrationIndex
 from schemas import (
