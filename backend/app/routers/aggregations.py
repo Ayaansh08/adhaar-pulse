@@ -24,3 +24,11 @@ def district_overview(
 ):
     """District-level breakdown for selected state"""
     return aggregate_district(state)
+
+@router.get("/debug/pwd")
+def debug_pwd():
+    import os
+    return {
+        "cwd": os.getcwd(),
+        "files": os.listdir(".")
+    }
