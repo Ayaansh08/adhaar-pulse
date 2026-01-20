@@ -1,6 +1,6 @@
 services:
   - name: aadhaar-frontend
-    type: static_site
+    type: static
     rootDir: .
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
