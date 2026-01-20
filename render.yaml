@@ -1,7 +1,7 @@
 services:
   - name: aadhaar-frontend
-    type: static
-    rootDir: adhaar-pulse-main
+    type: static_site
+    rootDir: .
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
     envVars:
@@ -10,7 +10,7 @@ services:
 
   - name: aadhaar-backend
     type: web
-    rootDir: adhaar-pulse-main/backend
+    rootDir: backend
     env: docker
     plan: free
     dockerfilePath: Dockerfile
