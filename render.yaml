@@ -1,6 +1,6 @@
 services:
   - name: aadhaar-frontend
-    type: static_site
+    type: static
     rootDir: .
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
@@ -10,8 +10,8 @@ services:
 
   - name: aadhaar-backend
     type: web
-    env: docker
     rootDir: backend
+    env: docker
     plan: free
     dockerfilePath: Dockerfile
     envVars:
@@ -25,3 +25,5 @@ services:
         sync: false
       - key: UVICORN_WORKERS
         value: "1"
+      - key: PORT
+        value: "10000"
