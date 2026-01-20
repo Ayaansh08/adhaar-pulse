@@ -1,0 +1,29 @@
+services:
+  - name: aadhaar-frontend
+    type: static
+    rootDir: adhaar-pulse-main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://aadhaar-backend.onrender.com
+
+  - name: aadhaar-backend
+    type: web
+    rootDir: adhaar-pulse-main/backend
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: STORAGE_BUCKET
+        value: your-bucket-url
+      - key: STORAGE_KEY
+        sync: false
+      - key: STORAGE_SECRET
+        sync: false
+      - key: DB_URL
+        sync: false
+      - key: UVICORN_WORKERS
+        value: "1"
+      - key: PORT
+        value: "10000"
