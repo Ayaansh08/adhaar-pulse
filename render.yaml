@@ -10,8 +10,8 @@ services:
 
   - name: aadhaar-backend
     type: web
-    rootDir: backend
     env: docker
+    rootDir: backend
     plan: free
     dockerfilePath: Dockerfile
     envVars:
@@ -25,5 +25,3 @@ services:
         sync: false
       - key: UVICORN_WORKERS
         value: "1"
-      - key: PORT
-        value: "10000"
